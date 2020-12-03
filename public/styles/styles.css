@@ -2,3 +2,42 @@
 .star{
     color:yellow;
 }
+
+
+/* footer css */
+@media screen and (min-width:400px){
+
+    #map{
+        height: 200px;
+        width: 300px;
+    }
+    
+    footer{text-align:center;background-color:#111;color:#444;padding:1% 0;
+        text-transform:uppercase;animation:fadeIn 5s ease-in-out;animation-delay:16s;}
+    
+    .contact{background-color:#222;height:300px;padding:0% 10%;margin-bottom: 0;}
+    
+    .contact .contact-info{
+    color:#fff;padding:3% 0;
+    display:flex;justify-content:space-around;
+    animation:fadeIn 5s ease-in-out;animation-delay:16s;
+    margin-bottom: -40%;}
+    
+    .contact .contact-info .contact-box{border-left:2px #eee solid;padding-left:2%;}
+    .contact .contact-info .contact-box  h3{font-size:25px;margin:3% 0;color:#F5c33c;text-transform:uppercase;}
+    .contact .contact-info .contact-box  p{font-size:12px;}
+    h4{font-size:25px;margin:3%;color:#F5c33c;text-transform:uppercase;}
+    
+    .contact .foot{padding-left:8%;display:flex;padding-top:3%;animation:fadeIn 5s ease-in-out;animation-delay:16s;}
+    .contact .foot .foot-box{width:33.3333%;padding:0 3%;margin-left:61%;margin-top:0%;}
+    .contact .foot .foot-box .foot-icon{margin-left:3%;margin-top:80%;}
+    .contact .foot .foot-box .foot-icon i{color:#555;margin-left:5%;}
+    .contact .foot .foot-box .foot-icon i:hover{color:#999;}
+    
+    .contact .foot .foot-box h3{color:#fff;text-transform:uppercase;}
+    .contact .foot .foot-box p{color:#555;}
+    .contact .foot .foot-box input{background-color:#222;border:1px #555 solid;
+        color:#999;padding:5px 15px;border-radius:10px;}
+}
+
+/* end of footer css  */
