@@ -1,4 +1,5 @@
 'use strict';
+
 let st = document.getElementById('meals').value;
 let idArray = st.split(',');
 console.log(idArray);
@@ -51,3 +52,7 @@ idArray.forEach(element => {
         }
     });
 });
+
+
+
+
