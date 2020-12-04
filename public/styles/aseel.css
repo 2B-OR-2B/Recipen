@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400&display=swap');/*font-family: 'Roboto Slab', serif;*/
 
+body{
+  font-family:'Roboto Slab', serif;
+}
 /* result css  */
 .card {
     /* Add shadows to create the "card" effect */
@@ -78,33 +82,72 @@ margin-top: 10%;
     /* end of css result page  */
 
 /* details page css */
+@media screen and (min-width: 400px){
 
-#details img{
+  .detailsMain{
+   width: 100%;
+    height: 1000px;
+    /* display: flex; */
+    margin:5% 0 0 0;
+    /* flex-direction: column;
+    flex-wrap: wrap; */
+    background-color: #ffffff;
+    justify-content: space-between;
+  }
+  .idImage{
+    width: 80%;
+  }
+  
+  #details{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-image: url("./../img/download2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    overflow-y: visible;
+    outline-width: 5px;
+    height: 800px;
+    padding-top:17%;
+    padding-right: 11%;
+    
+  }
+
+#picture img{
+  width:400px ;
+  height: 500px;
+  border-radius: 1rem;
+}
+
+#picture{
+width: 20%;
+height: 50%;
+padding-top: 5%;
+}
+.ing{
   width: 20%;
-  height: 20%;
-  border-radius: 2px;
+  height: 50%;
+ color: white;
+ line-height: 1.7em;
+ font-size: 18px;
+}
+#steps{
+  width:40%;
+  height: 80%;
+line-height: 1.6em;
+color: black;
 }
 
-#steps {
-  display: inline-block;
+
+
+
+
+
+
 
 }
-
-#details h2{
- 
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
