@@ -6,17 +6,19 @@
                     style="height: 50px; width: 50px;" >
             </div>
             <ul id="clickable">
-                <li><i id="homeLink"  class="fas fa-house-user">HOME</i></li>
-                <li><i id="searchLink" class="fas fa-search">SEARCH</i></li>
-                <li><i id="favLink" class=" fas fa-star">FAVORITES</i></li>
-              
-                
+                <li><i id="homeLink"  class="fas fa-house-user">&nbsp;
+                    HOME</i></li>
+                <li><i id="searchLink" class="fas fa-search">&nbsp;
+                    SEARCH</i></li>
+                <li><i id="favLink" class=" fas fa-star">&nbsp;
+                    FAVORITES</i></li>
+  
             </ul>
 
         </div>
         <div class="lastItem">
         <% if(id){%>
-            <span><%= userData.firstname%></span>
+            <span><i class="fas fa-user-circle"></i>&nbsp;<%= userData.firstname%></span>
         <%}
         else{%>
             <a href="/register">Sign In</a>
