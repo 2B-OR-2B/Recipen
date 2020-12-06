@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <title>Results</title>
+</head>
+<body>
+    
+
+    <header></header>
+    <main>
+
+        <section class="resultContainer">
+
+            <!-- 
+               -1 get favorites for user ( session )
+                1 data , suggestions
+                2 data.length ? data : suggestions 
+                3 for loop 
+                4 details button ( go to details page)
+                5 add to fav ==> user id ( sessions ) => store in db
+                
+             -->
+            <% 
+        
+            let type =suggestions[0]?suggestions[0].type : 'None';
+            let myData = data || suggestions || [];
+            if (myData.length){
+                    if( ! data.length){ %>
+                        <h2>There is no matched result for your request.<br>here is some suggested result based on your main ingredient (The first one). </h2>
+
+                   <% }
+                    myData.forEach(item=>{ %>
+                    <section class="item"> 
+                        <button><i class="star far fa-star"></i></button>
+                        <form action="/details" method="POST">
+                            <img src=<%= item.img_url %> >
+                            <p><%= item.name %> </p>
+                            <p><%= item.category %></p>
+                            <button>SHOW DETAILS</button>
+
+                            <input type="hidden" name="id" value=<%= item.id %> >
+                            <input type="hidden" name="name" value=<%= item.name %> >
+                            <input type="hidden" name="ingredients" value=<%= item.ingredients %>>
+                            <input type="hidden" name="steps" value=<%= item.steps %>>
+                            <input type="hidden" name="img_url" value=<%= item.img_url %>>
+                            <input type="hidden" name="vid_url" value=<%= item.vid_url %>>
+                            <input type="hidden" name="category" value=<%= item.category %>>
+                            <input type="hidden" name="type" value=<%= item.type %>>
+
+                            <% if(type==="food"){ %>
+                                
+                                <input type="hidden" name="area" value=<%= item.area %>>
+                           <% }   %>
+                            
+                          
+
+                        </form>
+                    </section>
+
+            <%       
+                 })
+            }
+            else{ %>
+
+                <h2>There is no matched results.. try again with different ingredients. <a href="./search.ejs">SEARCH AGAIN</a> </h2>   
+           <% }
+                  %>
+
+
+        </section>
+
+    </main>
+    <footer></footer>
+
+    <script src="./js/app.js"></script>
+</body>
+</html>
