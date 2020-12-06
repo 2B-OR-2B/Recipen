@@ -11,14 +11,16 @@
         <section>
             <img src=<%=obj.img_url%> >
             <iframe width="560" height="315" src=<%=obj.vid_url%> frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h2><%=obj.name%></h2>
             <div>
                 <ul>
-                     <li><%=obj.ingredients%></li>
-                    
+                    <%obj.ingredients.split(',').forEach(item=>{%>
+                     <li><%=item%></li>
+                    <%})%>
                 </ul>
             </div>
             <div>
-                <%=obj.steps%>
+               <%=obj.steps%>
             </div>
         </section>
     </main>
