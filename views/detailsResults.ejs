@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>detailsresults</title>
+</head>
+<body>
+    <header></header>
+    <main>
+        <section>
+            <img src="<%=obj.img_url%>" > 
+            
+             <h2><%=obj.name%></h2>
+            <div>
+                <h3>Ingredients</h3>
+                <ul>
+                    <%obj.ingredients.split(',').forEach(item=>{%>
+                     <li><%=item%></li>
+                    <%})%>
+                </ul>
+            </div>
+            <div>
+                <h3>Steps:</h3>
+                <ol>
+                    <%obj.steps.split('.').forEach(item=>{%>
+                     <li><%=item%></li>
+                    <%})%>
+                </ol>
+               
+            </div>
+            <% if(obj.vid_url){
+                let vid = obj.vid_url;
+
+                let ext=vid.indexOf('v=') !== -1 ? vid.substring(vid.indexOf('v=')+2) 
+                                                 : vid.substring(vid.indexOf('be/')+3);
+                let url = `https://www.youtube.com/embed/${ext}`
+                %>
+            <iframe width="560" height="315" src="<%= url%> " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <% } %>    
+
+        </section>
+    </main>
+    
+</body>
+</html>
