@@ -34,27 +34,42 @@
 
                    <% }
                     myData.forEach(item=>{ %>
+                   
                     <section class="item"> 
-                        <button><i class="star far fa-star"></i></button>
+                        <% let action = type==='food'? "/saveFood" : "/saveDrink"  %>
+                        <form action="<%=action%>" method="POST">
+                            <button><i class="star far fa-star"></i></button>
+                            <input type="hidden" name="id" value="<%= item.id %>" >
+                            <input type="hidden" name="name" value="<%= item.name %>" >
+                            <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
+                            <input type="hidden" name="steps" value= "<%= item.steps %>" > 
+                            <input type="hidden" name="img_url" value="<%= item.img_url %>">
+                            <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
+                            <input type="hidden" name="category" value="<%= item.category %>">
+                            <input type="hidden" name="type" value="<%= item.type %>">
+
+                            <% if(type==="food"){ %> 
+                                <input type="hidden" name="area" value="<%= item.area %>">
+                           <% }   %>
+                        </form>
                         <form action="/details" method="POST">
                             <img src=<%= item.img_url %> >
                             <p><%= item.name %> </p>
                             <p><%= item.category %></p>
                             <button>SHOW DETAILS</button>
 
-                            <input type="hidden" name="id" value=<%= item.id %> >
-                            <input type="hidden" name="name" value=<%= item.name %> >
-                            <input type="hidden" name="ingredients" value=<%= item.ingredients %>>
-                            <input type="hidden" name="steps" value=<%= item.steps %>>
-                            <%console.log(item.steps)%>
-                            <input type="hidden" name="img_url" value=<%= item.img_url %>>
-                            <input type="hidden" name="vid_url" value=<%= item.vid_url %>>
-                            <input type="hidden" name="category" value=<%= item.category %>>
-                            <input type="hidden" name="type" value=<%= item.type %>>
+                            <input type="hidden" name="id" value="<%= item.id %>" >
+                            <input type="hidden" name="name" value="<%= item.name %>" >
+                            <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
+                            <input type="hidden" name="steps" value= "<%= item.steps %>" > 
+                            <input type="hidden" name="img_url" value="<%= item.img_url %>">
+                            <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
+                            <input type="hidden" name="category" value="<%= item.category %>">
+                            <input type="hidden" name="type" value="<%= item.type %>">
 
                             <% if(type==="food"){ %>
                                 
-                                <input type="hidden" name="area" value=<%= item.area %>>
+                                <input type="hidden" name="area" value="<%= item.area %>">
                            <% }   %>
                             
                           
