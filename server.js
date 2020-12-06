@@ -189,28 +189,41 @@ function searchFoodHandler(req,res){
     superagent.get(url)
     .then(result=>result.body.meals.map(element=>element.idMeal))
    
-    .then(result2=>result2.map((ele,idx)=>`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${Number(result2[idx])}`))//get the links for each meal
+    .then(result2=>result2.map((ele,idx)=>`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${Number(ele)}`))//get the links for each meal
     .then(urls=>{
         let arr=urls.map((e,idxx)=>{ // will loop fo number of meals with 
             superagent.get(e)
             .then(result4=>{ // result4 is a meal we get it using ID 
                 let x = result4.body.meals[0]; // object inside the value of meals(array)
                 //     let y=reg.test(key)
-                let zero=0;
-                for(let i=0; i<20;i++){
-                    if(x[`strIngredient${zero}`]==secondIngredient || x[`strIngredient${zero}`]==thirdIngredient){
-                        // console.log(x[`strIngredient${zero}`],x.strMeal);
-                        if(x[`strIngredient${zero}`]){
-                        gArr.push(x[`strIngredient${zero}`])
-                        }
-                    
+                let keys = Object.keys(x);
+                let ingArr=[];
+                let counter=1;
+                keys.forEach((key)=>{
+                    if(key.includes(`strIngredient${counter}`)){
+                        ingArr.push(x[key]);
+                        counter++;
                     }
-                }
-                zero++;
-            console.log(gArr)
-            //     if(idxx==urls.length-1){
-            //    console.log('hi1221')
+                    
+                })
+                
+
+                
+            //     let zero=0;
+            //     for(let i=0; i<20;i++){
+            //         if(x[`strIngredient${zero}`]==secondIngredient || x[`strIngredient${zero}`]==thirdIngredient){
+            //             // console.log(x[`strIngredient${zero}`],x.strMeal);
+            //             if(x[`strIngredient${zero}`]){
+            //             gArr.push(x[`strIngredient${zero}`])
+            //             }
+                    
+            //         }
             //     }
+            //     zero++;
+            // console.log(gArr)
+            // //     if(idxx==urls.length-1){
+            // //    console.log('hi1221')
+            // //     }
             }).then(testvar=>{
                 // console.log(testvar,1212121)
             })
