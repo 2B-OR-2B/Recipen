@@ -17,6 +17,7 @@
  allow user to add comments on foods/drinks.
  allow user to evaluate what they tried to cook.
  allow users to publish their own recipes.
+ count the calories and nutratious value for each element.
 
 ## Functional Requirements:
 a user can update his profile info
