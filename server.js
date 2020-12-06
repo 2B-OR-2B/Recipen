@@ -6,6 +6,7 @@ require('dotenv').config();
 const pg = require('pg');
 const superagent = require('superagent');
 const methodOverride = require('method-override');
+const { search } = require('superagent');
 
 //app setup:
 const PORT = process.env.PORT || 3000;
@@ -23,6 +24,9 @@ app.use(methodOverride('_method'));
 app.post('/signIn', signInHandler);
 app.post('/signUp', signUpHandler);
 app.get('/', homePageHandler);
+app.get('/searchPage',searchPageHandler)
+app.post('/searchFood',searchFoodHandler);
+app.post('/searchDrink',searchDrinkHandler);
 app.post('/details', detailsHandler);
 app.post('/saveFood',saveFoodHandler);
 app.post('/saveDrink',saveDrinkHandler);
@@ -71,12 +75,13 @@ function signInHandler(req, res) {
 
 }
 
-function signUpHandler(req, res) {
-    /*     1 get: user data ( id ,fName, lName, email, password)
-           2 query to insert the user
-           3 redirect to singIn
-    */
-    const { firstName, lastName, email, pass } = req.body;
+function signUpHandler(req,res){
+
+/*     1 get: user data ( id ,fName, lName, email, password)
+       2 query to insert the user
+       3 redirect to singIn
+*/
+    const {firstName,lastName,email,pass}=req.body;
     let SQL = `INSERT INTO users (firstName,lastName,email,password) VALUES ($1,$2,$3,$4) RETURNING *;`;
     let values = [firstName, lastName, email, pass];
     client.query(SQL, values).then(data => {
@@ -95,23 +100,19 @@ function detailsHandler(req, res) {
     res.render('detailsResults', { obj: req.body })
 }
 
-function homePageHandler(req, res) {
-    let urlFood = `https://www.themealdb.com/api/json/v1/1/random.php`;
-    let cocktailUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail`;
-    let dessertUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert`;
-
-    superagent.get(urlFood).then(foodResult => {
-        superagent.get(cocktailUrl).then(cocktailResult => {
-            superagent.get(dessertUrl).then(dessertResult => {
-                res.render('register', { cocktail: cocktailResult, food: foodResult, dessert: dessertResult })
+function homePageHandler(req,res){
+    let urlFood=`https://www.themealdb.com/api/json/v1/1/random.php`;
+    let cocktailUrl=`https://www.thecocktaildb.com/api/json/v1/1/random.php`;
+    let dessertUrl=`https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert`;
+    
+    superagent.get(urlFood).then(foodResult=>{
+        superagent.get(cocktailUrl).then(cocktailResult=>{
+            superagent.get(dessertUrl).then(dessertResult=>{
+                res.render('index', {cocktail:cocktailResult.body,food:foodResult.body,dessert:dessertResult.body})
             })
         })
     })
-
-    // res.render('index');
-
-
-}
+    }
 
 function saveFoodHandler(req,res){
     let {id,name,ingredients,steps,img_url,vid_url,category,area} = req.body;
@@ -171,6 +172,61 @@ function Drinks(drinkObj) {
 }
 
 
+function searchPageHandler(req,res){
+res.render('search');
+}
+
+
+function searchFoodHandler(req,res){
+    // req.body()=> data from form
+    let firstIngredient=req.body.firstIngredient;
+    let secondIngredient=req.body.secondIngredient;
+    let thirdIngredient=req.body.thirdIngredient;
+    let url=`https://www.themealdb.com/api/json/v1/1/filter.php?i=${firstIngredient}`;
+    let searchByIdURL=``;
+    let gArr=[];
+    let newgArr=[];
+    superagent.get(url)
+    .then(result=>result.body.meals.map(element=>element.idMeal))
+   
+    .then(result2=>result2.map((ele,idx)=>`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${Number(result2[idx])}`))//get the links for each meal
+    .then(urls=>{
+        let arr=urls.map((e,idxx)=>{ // will loop fo number of meals with 
+            superagent.get(e)
+            .then(result4=>{ // result4 is a meal we get it using ID 
+                let x = result4.body.meals[0]; // object inside the value of meals(array)
+                //     let y=reg.test(key)
+                let zero=0;
+                for(let i=0; i<20;i++){
+                    if(x[`strIngredient${zero}`]==secondIngredient || x[`strIngredient${zero}`]==thirdIngredient){
+                        // console.log(x[`strIngredient${zero}`],x.strMeal);
+                        if(x[`strIngredient${zero}`]){
+                        gArr.push(x[`strIngredient${zero}`])
+                        }
+                    
+                    }
+                }
+                zero++;
+            console.log(gArr)
+            //     if(idxx==urls.length-1){
+            //    console.log('hi1221')
+            //     }
+            }).then(testvar=>{
+                // console.log(testvar,1212121)
+            })
+        })
+       
+    })
+// loop on the urls then search inside the ingredients of them
+
+
+}
+
+
+
+function searchDrinkHandler(req,res){
+    
+}
 
 
 //helper functions
@@ -181,6 +237,11 @@ function getFoodIngredients() {
 function getDrinkIngredients() {
 
 }
+
+
+
+
+
 
 
 // all routes & error 

@@ -8,6 +8,15 @@
 <body>
 
     <h1>Welocme here</h1>
-  
+    <h2><%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMeal%></h2>
+   <img src=<%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMealThumb%>>
+
+
+   <h2><%=cocktail.drinks[0].strDrink%></h2>
+   <img src=<%=cocktail.drinks[0].strDrinkThumb%>>
+
+   <h2><%=food.meals[0].strMeal%></h2>
+   <img src=<%=food.meals[0].strMealThumb%>>
+    
 </body>
 </html>
