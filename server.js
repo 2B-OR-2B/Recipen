@@ -24,12 +24,12 @@ app.use(methodOverride('_method'));
 app.post('/signIn', signInHandler);
 app.post('/signUp', signUpHandler);
 app.get('/', homePageHandler);
-app.get('/searchPage',searchPageHandler)
-app.post('/searchFood',searchFoodHandler);
-app.post('/searchDrink',searchDrinkHandler);
+app.get('/searchPage', searchPageHandler)
+app.post('/searchFood', searchFoodHandler);
+app.post('/searchDrink', searchDrinkHandler);
 app.post('/details', detailsHandler);
-app.post('/saveFood',saveFoodHandler);
-app.post('/saveDrink',saveDrinkHandler);
+app.post('/saveFood', saveFoodHandler);
+app.post('/saveDrink', saveDrinkHandler);
 //temporary rout
 app.get('/testResult', (req, res) => {
     res.render('result', {
@@ -75,13 +75,13 @@ function signInHandler(req, res) {
 
 }
 
-function signUpHandler(req,res){
+function signUpHandler(req, res) {
 
-/*     1 get: user data ( id ,fName, lName, email, password)
-       2 query to insert the user
-       3 redirect to singIn
-*/
-    const {firstName,lastName,email,pass}=req.body;
+    /*     1 get: user data ( id ,fName, lName, email, password)
+           2 query to insert the user
+           3 redirect to singIn
+    */
+    const { firstName, lastName, email, pass } = req.body;
     let SQL = `INSERT INTO users (firstName,lastName,email,password) VALUES ($1,$2,$3,$4) RETURNING *;`;
     let values = [firstName, lastName, email, pass];
     client.query(SQL, values).then(data => {
@@ -96,43 +96,43 @@ function signUpHandler(req,res){
 }
 
 function detailsHandler(req, res) {
-    
+
     res.render('detailsResults', { obj: req.body })
 }
 
-function homePageHandler(req,res){
-    let urlFood=`https://www.themealdb.com/api/json/v1/1/random.php`;
-    let cocktailUrl=`https://www.thecocktaildb.com/api/json/v1/1/random.php`;
-    let dessertUrl=`https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert`;
-    
-    superagent.get(urlFood).then(foodResult=>{
-        superagent.get(cocktailUrl).then(cocktailResult=>{
-            superagent.get(dessertUrl).then(dessertResult=>{
-                res.render('index', {cocktail:cocktailResult.body,food:foodResult.body,dessert:dessertResult.body})
+function homePageHandler(req, res) {
+    let urlFood = `https://www.themealdb.com/api/json/v1/1/random.php`;
+    let cocktailUrl = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
+    let dessertUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert`;
+
+    superagent.get(urlFood).then(foodResult => {
+        superagent.get(cocktailUrl).then(cocktailResult => {
+            superagent.get(dessertUrl).then(dessertResult => {
+                res.render('index', { cocktail: cocktailResult.body, food: foodResult.body, dessert: dessertResult.body })
             })
         })
     })
-    }
+}
 
-function saveFoodHandler(req,res){
-    let {id,name,ingredients,steps,img_url,vid_url,category,area} = req.body;
+function saveFoodHandler(req, res) {
+    let { id, name, ingredients, steps, img_url, vid_url, category, area } = req.body;
     let SQL = 'INSERT INTO foods VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
-    let values=[id,name,ingredients,steps,img_url,vid_url,category,area];
-    client.query(SQL,values).then(()=>{
-        
-        let SQL='SELECT food_id FROM fav_foods WHERE user_id = $1 ;';
-        let values=[id];
-        client.query(SQL).then(result=>{
-            res.render('result',{favFood:result.rows })
+    let values = [id, name, ingredients, steps, img_url, vid_url, category, area];
+    client.query(SQL, values).then(() => {
+
+        let SQL = 'SELECT food_id FROM fav_foods WHERE user_id = $1 ;';
+        let values = [id];
+        client.query(SQL).then(result => {
+            res.render('result', { favFood: result.rows })
 
         }
         )
     })
 }
-function saveDrinkHandler(req,res){
-    let {id,name,ingredients,steps,img_url,vid_url,category} = req.body;
+function saveDrinkHandler(req, res) {
+    let { id, name, ingredients, steps, img_url, vid_url, category } = req.body;
     let SQL = 'INSERT INTO drinks VALUES ($1,$2,$3,$4,$5,$6,$7)';
-    let values=[id,name,ingredients,steps,img_url,vid_url,category];
+    let values = [id, name, ingredients, steps, img_url, vid_url, category];
 
 }
 
@@ -172,82 +172,160 @@ function Drinks(drinkObj) {
 }
 
 
-function searchPageHandler(req,res){
-res.render('search');
+function searchPageHandler(req, res) {
+    res.render('search');
 }
 
 
-function searchFoodHandler(req,res){
+function searchFoodHandler(req, res) {
     // req.body()=> data from form
-    let firstIngredient=req.body.firstIngredient;
-    let secondIngredient=req.body.secondIngredient;
-    let thirdIngredient=req.body.thirdIngredient;
-    let url=`https://www.themealdb.com/api/json/v1/1/filter.php?i=${firstIngredient}`;
-    let searchByIdURL=``;
-    let gArr=[];
-    let newgArr=[];
+    let firstIngredient = req.body.firstIngredient;
+    let secondIngredient = req.body.secondIngredient;
+    let thirdIngredient = req.body.thirdIngredient;
+    let url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${firstIngredient}`;
+    let searchByIdURL = ``;
+    let gArr = [];
+    let counter = 0;
+    let resultObjects = []; //objects has the ingredient.
     superagent.get(url)
-    .then(result=>result.body.meals.map(element=>element.idMeal))
-   
-    .then(result2=>result2.map((ele,idx)=>`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${Number(ele)}`))//get the links for each meal
-    .then(urls=>{
-        let arr=urls.map((e,idxx)=>{ // will loop fo number of meals with 
-            superagent.get(e)
-            .then(result4=>{ // result4 is a meal we get it using ID 
-                let x = result4.body.meals[0]; // object inside the value of meals(array)
-                //     let y=reg.test(key)
-                let keys = Object.keys(x);
-                let ingArr=[];
-                let counter=1;
-                keys.forEach((key)=>{
-                    if(key.includes(`strIngredient${counter}`)){
-                        ingArr.push(x[key]);
-                        counter++;
-                    }
-                    
-                })
-                
+        .then(result => result.body.meals.map(element => element.idMeal))
+        .then(result2 => result2.map((ele, idx) => `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${Number(result2[idx])}`))//get the links for each meal
+        .then(urls => {
+            let suggestions = [];
+            let arr = urls.map((e, idxx) => { // will loop fo number of meals with 
+                superagent.get(e)
+                    .then(result4 => { // result4 is a meal we get it using ID 
+                        let x = result4.body.meals[0]; // object inside the value of meals(array)
+                        for (let i = 1; i < 21; i++) {
+                            if (x[`strIngredient${i}`] == secondIngredient || x[`strIngredient${i}`] == thirdIngredient) {
+                                // console.log(x[`strIngredient${zero}`],x.strMeal);
+                                if (x[`strIngredient${i}`]) {
+                                    gArr.push(x)
+                                }
 
-                
-            //     let zero=0;
-            //     for(let i=0; i<20;i++){
-            //         if(x[`strIngredient${zero}`]==secondIngredient || x[`strIngredient${zero}`]==thirdIngredient){
-            //             // console.log(x[`strIngredient${zero}`],x.strMeal);
-            //             if(x[`strIngredient${zero}`]){
-            //             gArr.push(x[`strIngredient${zero}`])
-            //             }
-                    
-            //         }
-            //     }
-            //     zero++;
-            // console.log(gArr)
-            // //     if(idxx==urls.length-1){
-            // //    console.log('hi1221')
-            // //     }
-            }).then(testvar=>{
-                // console.log(testvar,1212121)
+                            }
+                        }
+                        counter++;
+                        suggestions.push(result4.body.meals[0]);
+                        if (counter == urls.length - 1) {
+                            resultObjects = gArr;
+                            return [resultObjects, suggestions]; //return datafrom the second and third , from the first ingrefient;
+                        }
+                        else {
+                            return false;
+                        }
+
+                    })
+                    .then((result9, idx) => { //two arrayys one for the data and one for hte suggestions
+                        if (result9) {
+                            let dataArray = result9[0].map(element => new Food(element))
+                            let suggestionsArray = result9[1].map(element => new Food(element))
+                            // res.render('result',{data:dataArray,suggestions:suggestionsArray});
+                                console.log(dataArray)
+                        }
+                    })
             })
+
+
         })
-       
-    })
-// loop on the urls then search inside the ingredients of them
+    // loop on the urls then search inside the ingredients of them
 
 
 }
 
 
 
-function searchDrinkHandler(req,res){
-    
+function searchDrinkHandler(req, res) {
+    let firstIngredient = req.body.firstIngredient;
+    let secondIngredient = req.body.secondIngredient;
+    let thirdIngredient = req.body.thirdIngredient;
+    let url=`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${firstIngredient}`;
+    let searchByIdURL = ``;
+    let gArr = [];
+    let counter = 0; // to go throw the obeject of coocktail and get hte stringredent.
+    let resultObjects = []; //objects has the ingredient.
+    superagent.get(url)
+        .then(result => result.body.drinks.map(element => element.idDrink))
+        .then(result2 => result2.map((ele, idx) => `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${Number(result2[idx])}`))//get the links for each meal
+        .then(urls => {
+            let suggestions = [];
+            let arr = urls.map((e, idxx) => { // will loop fo number of meals with 
+                superagent.get(e)
+                    .then(result4 => { // result4 is a meal we get it using ID 
+                        let x = result4.body.drinks[0]; // object inside the value of meals(array)
+                        for (let i = 1; i < 16; i++) {
+                            // console.log(i)
+                            if (x[`strIngredient${i}`] == secondIngredient || x[`strIngredient${i}`] == thirdIngredient) {
+                                // console.log(x[`strIngredient${zero}`],x.strMeal);
+                                // console.log(12121212)
+                                if (x[`strIngredient${i}`]) {
+                                    gArr.push(x)
+                                }
+                            }
+                        }
+                        counter++;
+                        suggestions.push(result4.body.drinks[0]);
+                        if (counter == urls.length - 1) {
+                            // console.log(gArr)
+                            resultObjects = gArr;
+                            return [resultObjects, suggestions]; //return datafrom the second and third , from the first ingrefient;
+                        }
+                        else {
+                            return false;
+                        }
+
+                    })
+                    .then((result9, idx) => { //two arrayys one for the data and one for hte suggestions
+                        if (result9) {
+                            let dataArray = result9[0].map(element => new Drinks(element))
+                            let suggestionsArray = result9[1].map(element => new Drinks(element))
+                            // res.render('result',{data:dataArray,suggestions:suggestionsArray});
+                                console.log(dataArray)
+                        }
+                    })
+            })
+
+
+        })
 }
 
 
 //helper functions
-function getFoodIngredients() {
+function getFoodIngredients(foodObject) {
+    let counter = 1; //for getting the number beside ingredient word
+    let ingredientString = [];
+
+    let objects = Object.keys(foodObject).map(key => {
+        if (key == `strIngredient${counter}`) {
+            if (foodObject[key]) {
+                ingredientString.push(foodObject[key] + ' ' + foodObject[`strMeasure${counter}`]);
+            }
+            counter++;
+        }
+    })
+
+        return ingredientString.join(',');
+
+   
 
 }
 
-function getDrinkIngredients() {
+function getDrinkIngredients(drinkObject) {
+    let counter = 1; //for getting the number beside ingredient word
+    let ingredientString = [];
+
+    let objects = Object.keys(drinkObject).map(key => {
+        if (key == `strIngredient${counter}`) {
+            if (drinkObject[key]) {
+                ingredientString.push(drinkObject[key] + ' ' + drinkObject[`strMeasure${counter}`]);
+            }
+            counter++;
+        }
+    })
+
+        return ingredientString.join(',');
+
+   
 
 }
 
