@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>detailsresults</title>
+</head>
+<body>
+    <header></header>
+    <main>
+        <section>
+            <img src=<%=obj.img_url%> >
+            <iframe width="560" height="315" src=<%=obj.vid_url%> frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div>
+                <ul>
+                     <li><%=obj.ingredients%></li>
+                    
+                </ul>
+            </div>
+            <div>
+                <%=obj.steps%>
+            </div>
+        </section>
+    </main>
+    
+</body>
+</html>
