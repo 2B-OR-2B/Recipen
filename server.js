@@ -1,3 +1,5 @@
+'use strict';
+
 // app dependencies 
 const express = require('express');
 require('dotenv').config();
@@ -20,9 +22,14 @@ app.use(methodOverride('_method'));
 // routes
 app.post('/signIn',signInHandler);
 app.post('/signUp',signUpHandler);
+app.get('/',homePageHandler);
+
+
+
 
 
 // handler functions
+
 function signInHandler(req,res){
     /* 1 get:  email, pass
        2 query to check the email & pass
@@ -66,9 +73,27 @@ function signUpHandler(req,res){
 
 
 }
+function homePageHandler(req,res){
+let urlFood=`https://www.themealdb.com/api/json/v1/1/random.php`;
+let cocktailUrl=`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail`;
+let dessertUrl=`https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert`;
 
-function errorHandler(error,req,res){
-    res.status(500).json(error)
+superagent.get(urlFood).then(foodResult=>{
+    superagent.get(cocktailUrl).then(cocktailResult=>{
+        superagent.get(dessertUrl).then(dessertResult=>{
+            res.render('register',{cocktail:cocktailResult,food:foodResult,dessert:dessertResult})
+        })
+    })
+})
+
+// res.render('index');
+
+
+}
+function errorHandler(req,res){
+    res.status(500)
+    res.json('errorHandler');
+    
 }
 
 function anyRouteHandler(req,res){
@@ -76,10 +101,44 @@ function anyRouteHandler(req,res){
 }
 
 
+
+
 // constructors 
 
+function Food(foodObj){
+this.food_id=foodObj.idMeal;
+this.name=foodObj.strMeal;
+this.ingredients=getFoodIngredients(foodObj);
+this.steps=foodObj.strInstructions? foodObj.strInstructions: 'There is no instructions';
+this.img_url=foodObj.strMealThumb? foodObj.strMealThumb: 'https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80';
+this.area=foodObj.strArea? foodObj.strArea:'No Area';
+this.category=foodObj.strCategory?foodObj.strCategory:'No Category';
+this.vid_url=foodObj.strYoutube? foodObj.strYoutube:'https://youtu.be/wkg_AyHE82w';
+this.type='food';
+}
+
+function Drinks(drinkObj){
+    this.drink_id=drinkObj.idDrink;
+    this.name=drinkObj.strDrink;
+    this.ingredients=getDrinkIngredients(drinkObj);
+    this.steps=drinkObj.strInstructions? drinkObj.strInstructions: 'There is no instructions';
+    this.img_url=drinkObj.strDrinkThumb? drinkObj.strDrinkThumb:'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80';
+    this.category=drinkObj.strCategory?drinkObj.strCategory:'No Category';
+    this.vid_url=drinkObj.strVideo?drinkObj.strVideo :'https://youtu.be/FSpxlvcw9d4';
+    this.type='drink';
+}
 
 
+
+
+//helper functions
+function getFoodIngredients(){
+
+}
+
+function getDrinkIngredients(){
+
+}
 
 
 // all routes & error 
@@ -91,3 +150,4 @@ client.connect().then(()=>{
     app.listen(PORT,()=>{console.log(`Listening on ${PORT}`)})
 
 })
+
