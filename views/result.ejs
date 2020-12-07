@@ -15,45 +15,30 @@
 
         <section class="resultContainer">
 
-            <!-- 
-               -1 get favorites for user ( session )
-                1 data , suggestions
-                2 data.length ? data : suggestions 
-                3 for loop 
-                4 details button ( go to details page)
-                5 add to fav ==> user id ( sessions ) => store in db
-                
-                id should be recieved from search page.. ( id ) for user id.
-             -->
+           
             <% 
-             
+
             let type =suggestions[0]?suggestions[0].type : 'None';
             let myData = data || suggestions || [];
+            let idsArray=[];
+           
             if (myData.length){
                     if( ! data.length){ %>
                         <h2>There is no matched result for your request.<br>here is some suggested result based on your main ingredient (The first one). </h2>
 
                    <% }
-                    myData.forEach(item=>{ %>
+                    myData.forEach(item=>{ 
+                        idsArray.push(item.id);
+                    %>
                    
                     <section class="item">
-                         <!--add the id to the routes .. saveFood and saveDrink as query params  -->
-                        <% let action = type==='food'? "/saveFood" : "/saveDrink"  %>
-                        <form action="<%=action%>" method="POST">
-                            <button><i class="star far fa-star"></i></button>
-                            <input type="hidden" name="id" value="<%= item.id %>" >
-                            <input type="hidden" name="name" value="<%= item.name %>" >
-                            <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
-                            <input type="hidden" name="steps" value= "<%= item.steps %>" > 
-                            <input type="hidden" name="img_url" value="<%= item.img_url %>">
-                            <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
-                            <input type="hidden" name="category" value="<%= item.category %>">
-                            <input type="hidden" name="type" value="<%= item.type %>">
+                        
 
-                            <% if(type==="food"){ %> 
-                                <input type="hidden" name="area" value="<%= item.area %>">
-                           <% }   %>
-                        </form>
+                        
+                        
+
+
+
                         <form action="/details" method="POST">
                             <img src=<%= item.img_url %> >
                             <p><%= item.name %> </p>
@@ -77,6 +62,27 @@
                           
 
                         </form>
+
+
+                        <% let action = type==='food'? "/saveFood" : "/saveDrink"  %>
+                        <form id="<%=item.id%>" action="" method="POST">
+                            <button id='saveFood'>ADD TO FAVORITES</button>
+                            <input type="hidden" name="id" value="<%= item.id %>" >
+                            <input type="hidden" name="name" value="<%= item.name %>" >
+                            <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
+                            <input type="hidden" name="steps" value= "<%= item.steps %>" > 
+                            <input type="hidden" name="img_url" value="<%= item.img_url %>">
+                            <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
+                            <input type="hidden" name="category" value="<%= item.category %>">
+                            <input type="hidden" name="type" value="<%= item.type %>">
+                            <input type="hidden" name="route" value ="<%=action%>?id=<%=id%>">
+                            <% if(type==="food"){ %> 
+                                <input type="hidden" name="area" value="<%= item.area %>">
+                           <% }   %>
+                        </form>
+
+
+
                     </section>
 
             <%       
@@ -86,13 +92,75 @@
 
                 <h2>There is no matched results.. try again with different ingredients. <a href="./search.ejs">SEARCH AGAIN</a> </h2>   
            <% }
+           let idsSt= idsArray.join();
                   %>
 
-
+                <input id="meals" type="hidden" name="ids"value="<%=idsSt %>">
         </section>
 
     </main>
     <footer></footer>
+    <script>
+        
+         let st = document.getElementById('meals').value;
+         let idArray=st.split(',');
+         console.log(idArray);
+
+         idArray.forEach(element => {
+             document.getElementById(element).addEventListener('click',function sendQuery(event){
+               if(event.target.id==='saveFood'){
+                  event.preventDefault();
+              let form = event.target.parentNode;
+              let obj={
+                id : form.id.value,
+                name : form.name.value,
+               ingredients : form.ingredients.value,
+               steps : form.steps.value,
+               img_url : form.img_url.value,
+               vid_url : form.vid_url.value,
+               category : form.category.value,
+               type : form.type.value,
+               route: form.route.value
+              }
+              let  url=`http://localhost:3000${obj.route}`;
+              console.log(url);
+              if(obj.type==='food'){
+                  obj['area']= form.area.value;
+                 
+              }
+
+
+              console.log(obj)
+              fetch(url,{
+                            method: 'POST', 
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(obj),
+                            })
+                            .then(response=>response.json())
+                            .then(data=>{
+                                if(data!== 'done'){
+                                    alert('Already Exists In Your Favorite List');
+                                }
+                                else{
+                                    alert('Added To Your Favorite List');
+                                }
+                                console.log(data)})
+                            .catch(e=>console.log(e));
+
+
+            }
+             
+               
+              
+
+
+
+             });
+             
+         });
+    </script>
 
     <script src="./js/app.js"></script>
 </body>

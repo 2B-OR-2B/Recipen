@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS fav_foods (
 CREATE TABLE IF NOT EXISTS fav_drinks (
     user_id INT ,
     drink_id INT ,
+    PRIMARY KEY(user_id, drink_id),
     CONSTRAINT fk_drink FOREIGN KEY(drink_id) REFERENCES drinks(id),
     CONSTRAINT fk_user_drink FOREIGN KEY(user_id) REFERENCES users(id)
 );
