@@ -1,12 +1,10 @@
 
     <div class="nav">
-        <% if(!id){
-           let id='';
-        }%>
+        
         <ul>
             <li><a href="/?id=<%=id%>"><i class="fas fa-house-user">Home</i></a></i></li>
             <li><a href="/searchPage?id=<%=id%>"><i class="fas fa-search"></i>SEARCH</a></li>
-            <li><a href=""><i class="star far fa-star"></i>FAVORITES</a></li>
+            <li><a href="/fav?id=<%=id%>"><i class="star far fa-star"></i>FAVORITES</a></li>
 
         </ul>
         <div class="logo">

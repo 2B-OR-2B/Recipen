@@ -32,7 +32,7 @@
 
 
 
-            <form action="/details" method="POST">
+            <form action="/details?id=<%=id%>" method="POST">
                 <img src=<%= item.img_url %>>
                 <p><%= item.name %> </p>
                 <p><%= item.category %></p>
@@ -83,7 +83,7 @@
             }
             else{ %>
 
-        <h2>There is no matched results.. try again with different ingredients. <a href="./search.ejs">SEARCH AGAIN</a>
+        <h2>There is no matched results.. try again with different ingredients. <a href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
         </h2>
         <% }
            let idsSt= idsArray.join();
@@ -94,7 +94,7 @@
 
 </main>
 <%- include('./layout/footer.ejs') %>
-<script src="./js/app.js"></script>
+<script src="./js/app_result.js"></script>
 </body>
 
 </html>
