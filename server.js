@@ -15,7 +15,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+app.use(express.json());
 app.use(methodOverride('_method'));
 
 
@@ -103,8 +103,7 @@ function detailsHandler(req, res) {
 
     res.render('detailsResults', { obj: req.body })
 }
-// sessionStorage.setItem("","");
-// sessionStorage.getItem("");
+
 function homePageHandler(req, res) {
     let id = req.query.id || -1;
     let SQL = 'SELECT * FROM users WHERE id = $1';
@@ -127,24 +126,47 @@ function homePageHandler(req, res) {
 }
 
 function saveFoodHandler(req, res) {
-    let { id, name, ingredients, steps, img_url, vid_url, category, area } = req.body;
-    let SQL = 'INSERT INTO foods VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
+    let id = Number(req.body.id);
+    let { name, ingredients, steps, img_url, vid_url, category, area } = req.body;
+    let userID =Number( req.query.id);
+    console.log(id,"-----",userID);
+    let SQL = 'INSERT INTO foods VALUES ($1,$2,$3,$4,$5,$6,$7,$8) ON CONFLICT DO NOTHING';
     let values = [id, name, ingredients, steps, img_url, vid_url, category, area];
     client.query(SQL, values).then(() => {
-
-        let SQL = 'SELECT food_id FROM fav_foods WHERE user_id = $1 ;';
-        let values = [id];
-        client.query(SQL).then(result => {
-            res.render('result', { favFood: result.rows })
-
+        let SQL2 ='INSERT INTO fav_foods VALUES ($1,$2)';
+        let Values2 = [userID,id];
+        client.query(SQL2,Values2).then(()=>{
+            res.status(200).json('done')
+           
         }
-        )
+        ).catch(error=>{res.status(600).json(" ------ Already exists in your favorites")})
+        
     })
+   
 }
 function saveDrinkHandler(req, res) {
-    let { id, name, ingredients, steps, img_url, vid_url, category } = req.body;
-    let SQL = 'INSERT INTO drinks VALUES ($1,$2,$3,$4,$5,$6,$7)';
+    // let { id, name, ingredients, steps, img_url, vid_url, category } = req.body;
+    // let SQL = 'INSERT INTO drinks VALUES ($1,$2,$3,$4,$5,$6,$7)';
+    // let values = [id, name, ingredients, steps, img_url, vid_url, category];
+    // res.json('hello drink')
+
+    let id = Number(req.body.id); // drink id
+    let { name, ingredients, steps, img_url, vid_url, category, area } = req.body;
+    let userID =Number( req.query.id);
+    console.log(id,"-----",userID);
+    let SQL = 'INSERT INTO drinks VALUES ($1,$2,$3,$4,$5,$6,$7) ON CONFLICT DO NOTHING';
     let values = [id, name, ingredients, steps, img_url, vid_url, category];
+    client.query(SQL, values).then(() => {
+        let SQL2 ='INSERT INTO fav_drinks VALUES ($1,$2)';
+        let Values2 = [userID,id];
+        client.query(SQL2,Values2).then(()=>{
+            res.status(200).json('done')
+           
+        }
+        ).catch(error=>{res.status(600).json(" ------ Already exists in your favorites")})
+        
+    })
+   
 
 }
 
@@ -160,7 +182,7 @@ function anyRouteHandler(req, res) {
 // constructors 
 
 function Food(foodObj) {
-    this.food_id = foodObj.idMeal;
+    this.id = foodObj.idMeal;
     this.name = foodObj.strMeal;
     this.ingredients = getFoodIngredients(foodObj);
     this.steps = foodObj.strInstructions ? foodObj.strInstructions : 'There is no instructions';
@@ -173,7 +195,7 @@ function Food(foodObj) {
 
 
 function Drinks(drinkObj) {
-    this.drink_id = drinkObj.idDrink;
+    this.id = drinkObj.idDrink;
     this.name = drinkObj.strDrink;
     this.ingredients = getDrinkIngredients(drinkObj);
     this.steps = drinkObj.strInstructions ? drinkObj.strInstructions : 'There is no instructions';
@@ -210,15 +232,11 @@ function searchFoodHandler(req, res) {
                 superagent.get(e)
                     .then(result4 => { // result4 is a meal we get it using ID 
                         let x = result4.body.meals[0]; // object inside the value of meals(array)
-                        for (let i = 1; i < 21; i++) {
-                            if (x[`strIngredient${i}`] == secondIngredient || x[`strIngredient${i}`] == thirdIngredient) {
-                                // console.log(x[`strIngredient${zero}`],x.strMeal);
-                                if (x[`strIngredient${i}`]) {
-                                    gArr.push(x)
-                                }
+                        if(  getFoodIngredients(x).includes(secondIngredient) && getFoodIngredients(x).includes(thirdIngredient)  ){
 
-                            }
+                            gArr.push(x);
                         }
+
                         counter++;
                         suggestions.push(result4.body.meals[0]);
                         if (counter == urls.length - 1) {
@@ -233,9 +251,10 @@ function searchFoodHandler(req, res) {
                     .then((result9, idx) => { //two arrayys one for the data and one for hte suggestions
                         if (result9) {
                             let dataArray = result9[0].map(element => new Food(element))
+                            dataArray = dataArray.length? dataArray: '';
                             let suggestionsArray = result9[1].map(element => new Food(element))
-                            // res.render('result',{data:dataArray,suggestions:suggestionsArray});
-                                console.log(dataArray)
+                            suggestionsArray=suggestionsArray.length? suggestionsArray : '';
+                            res.render('result',{data:dataArray,suggestions:suggestionsArray,id:id});
                         }
                     })
             })
@@ -250,7 +269,7 @@ function searchFoodHandler(req, res) {
 
 
 function searchDrinkHandler(req, res) {
-    let id = req.body.id; // send it within the render method to the result page...
+    let id = req.query.id; // send it within the render method to the result page...
     let firstIngredient = req.body.firstIngredient;
     let secondIngredient = req.body.secondIngredient;
     let thirdIngredient = req.body.thirdIngredient;
@@ -268,18 +287,18 @@ function searchDrinkHandler(req, res) {
                 superagent.get(e)
                     .then(result4 => { // result4 is a meal we get it using ID 
                         let x = result4.body.drinks[0]; // object inside the value of meals(array)
-                        for (let i = 1; i < 16; i++) {
-                            // console.log(i)
-                            if (x[`strIngredient${i}`] == secondIngredient || x[`strIngredient${i}`] == thirdIngredient) {
-                                // console.log(x[`strIngredient${zero}`],x.strMeal);
-                                // console.log(12121212)
-                                if (x[`strIngredient${i}`]) {
-                                    gArr.push(x)
-                                }
-                            }
+                      
+                    
+                        if(  getDrinkIngredients(x).includes(secondIngredient) && getDrinkIngredients(x).includes(thirdIngredient)  ){
+
+                            gArr.push(x);
                         }
+
+
+
+
                         counter++;
-                        suggestions.push(result4.body.drinks[0]);
+                        suggestions.push(x);
                         if (counter == urls.length - 1) {
                             // console.log(gArr)
                             resultObjects = gArr;
@@ -293,9 +312,11 @@ function searchDrinkHandler(req, res) {
                     .then((result9, idx) => { //two arrayys one for the data and one for hte suggestions
                         if (result9) {
                             let dataArray = result9[0].map(element => new Drinks(element))
+                            dataArray=dataArray.length? dataArray: '';
                             let suggestionsArray = result9[1].map(element => new Drinks(element))
-                            // res.render('result',{data:dataArray,suggestions:suggestionsArray});
-                                console.log(dataArray)
+                            suggestionsArray= suggestionsArray.length? suggestionsArray : '';
+                            res.render('result',{data:dataArray,suggestions:suggestionsArray,id:id});
+                                
                         }
                     })
             })

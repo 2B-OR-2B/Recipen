@@ -1,7 +1,6 @@
 <%- include('./layout/head.ejs')%>
     
-
-<%- include('./layout/nav.ejs')%>
+<body>
     
     <form action="/searchFood?id=<%=id%>" method="POST">
         <input type="text" name="firstIngredient" placeholder="first" >
@@ -18,4 +17,8 @@
         <button> sumbmit drink</button>
     </form>
 
-    <%- include('./layout/footer.ejs')%>
+    <%- include('./layout/footer.ejs') %>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>

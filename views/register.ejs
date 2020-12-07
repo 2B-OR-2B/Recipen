@@ -1,6 +1,6 @@
 <%- include('./layout/head.ejs')%>
     
-
+<body>
 <%- include('./layout/nav.ejs')%>
     <form action="/signIn" method="POST">
         <input type="text" name="email">
@@ -14,4 +14,8 @@
         <input type="text" name="pass">
         <button type="submit" >SIGN UP</button>
     </form>
-    <%- include('./layout/footer.ejs')%>
+    <%- include('./layout/footer.ejs') %>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
