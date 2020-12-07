@@ -2,3 +2,45 @@
 .star{
     color:yellow;
 }
+
+@media screen and (min-width: 400px) {
+    body{
+        background-image: url('.././img/body.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+
+    }
+    .header{
+        width: 100%;
+        background-image: linear-gradient(to bottom right,white, yellow);
+        background-image:url('../img/madmax-chef-XGRUl2r7i7g-unsplash.jpg') ;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        height: 600px;
+        line-height: 600px;
+
+    }
+    .nav {
+        height: 25%;
+        background-color:white ;
+        position: fixed;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 100px;
+    }
+    .nav ul {
+        display: flex;
+    }
+    .greeting{
+        height: 100%;
+        width: 100%;
+          
+    }
+}
