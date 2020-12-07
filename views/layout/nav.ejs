@@ -1,4 +1,7 @@
 <nav>
+    <% if(!id){
+        id='';
+    }%>
     <ul>
         <li><a href="/?id=<%=id%>">HOME</a></li>
         <li><a href="/searchPage?id=<%=id%>">SEARCH</a></li>
