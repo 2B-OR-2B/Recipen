@@ -1,20 +1,83 @@
 <%- include('./layout/head.ejs')%>
     
+<%let id ='' ; %>
 <body>
-<%- include('./layout/nav.ejs')%>
-    <form action="/signIn" method="POST">
-        <input type="text" name="email">
-        <input type="text" name="pass">
-        <button type="submit" >Sign In</button>
-    </form>
-    <form action="/signUp" method="POST">
-        <input type="text" name="firstName">
-        <input type="text" name="lastName">
-        <input type="text" name="email">
-        <input type="text" name="pass">
-        <button type="submit" >SIGN UP</button>
-    </form>
+    <%- include('./layout/nav.ejs')%>
+    <section class="user">
+        <div class="user_options-container">
+            <div class="user_options-text">
+
+                <div class="user_options-unregistered">
+                    <h2 class="user_unregistered-title">Don't have an account?</h2>
+                    <p class="user_unregistered-text">Join Us By Signing Up</p>
+                    <button class="user_unregistered-signup" id="signup-button">Sign up</button>
+                </div>
+
+                <div class="user_options-registered">
+                    <h2 class="user_registered-title">Have an account?</h2>
+                    <p class="user_registered-text">Come On Enjoy Our Recipies</p>
+                    <button class="user_registered-login" id="login-button">Sign In</button>
+                </div>
+            </div>
+
+            <div class="user_options-forms" id="user_options-forms">
+                <div class="user_forms-login">
+                    <h2 class="forms_title">Sign in</h2>
+                    <form action="/signIn" method="POST" class="forms_form">
+                        <fieldset class="forms_fieldset">
+                            <div class="forms_field">
+                                <input type="text" name="email" placeholder="Email" class="forms_field-input" required
+                                    autofocus>
+                            </div>
+                            <div class="forms_field">
+
+                                <input type="text" name="pass" placeholder="Password" class="forms_field-input"
+                                    required>
+                            </div>
+                        </fieldset>
+                        <div class="forms_buttons">
+
+                            <button type="submit" class="forms_buttons-action">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="user_forms-signup">
+                    <h2 class="forms_title">Sign Up</h2>
+                    <form action="/signUp" method="POST" class="forms_form">
+                        <fieldset class="forms_fieldset">
+                            <div class="forms_field">
+                                <input type="text" name="firstName" placeholder="First Name" class="forms_field-input"
+                                    required>
+                            </div>
+                            <div class="forms_field">
+                                <input type="text" name="lastName" placeholder="Last Name" class="forms_field-input"
+                                    required>
+                            </div>
+                            <div class="forms_field">
+                                <input type="text" name="email" placeholder="Email" class="forms_field-input" required>
+                            </div>
+                            <div class="forms_field">
+                                <input type="text" name="pass" placeholder="Password" class="forms_field-input">
+                            </div>
+                        </fieldset>
+                        <div class="forms_buttons">
+
+                            <button type="submit" class="forms_buttons-action">SIGN UP</button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+        
+        <input type="hidden" id="isLoggedIn" name="isLoggedIn" value="<%=isLoggedIn%>">
+        <input type="hidden" id="isRegistered" name="isRegistered" value="<%=isRegistered%>">
+    </section>
     <%- include('./layout/footer.ejs') %>
+    <script src="./js/sign.js"></script>
     <script src="./js/app.js"></script>
 </body>
 

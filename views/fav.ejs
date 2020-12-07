@@ -1,0 +1,86 @@
+<%- include('./layout/head.ejs')%>
+<body>
+
+    <!-- <%- include('./layout/nav.ejs')%> -->
+
+
+<main>
+    <section class="resultContainer">
+
+
+        <% 
+
+           
+            foods=foods.map(val=>{
+                val['type']='food';
+                return val;
+            })
+            drinks=drinks.map(val=>{
+                val['type']='drink';
+                return val;
+            })
+            let myData = foods.concat(drinks);
+            
+           
+            if (myData.length){
+                    
+                    myData.forEach(item=>{  %>
+
+        <section class="item">
+
+            <form action="/details?id=<%=id%>" method="POST">
+                <img src=<%= item.img_url %>>
+                <p><%= item.name %> </p>
+                <p><%= item.category %></p>
+                
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <input type="hidden" name="name" value="<%= item.name %>">
+                <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
+                <input type="hidden" name="steps" value="<%= item.steps %>">
+                <input type="hidden" name="img_url" value="<%= item.img_url %>">
+                <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
+                <input type="hidden" name="category" value="<%= item.category %>">
+                <input type="hidden" name="type" value="<%= item.type %>">
+                
+                <% if(item.type==="food"){ %>
+                    
+                    <input type="hidden" name="area" value="<%= item.area %>">
+                    <% }   %>
+                    
+                    <button>SHOW DETAILS</button>
+                    
+
+            </form>
+
+
+            
+            <form id="<%=item.id%>" action="/deleteFav?id=<%=id%>&_method=delete" method="POST">
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <input type="hidden" name="type" value="<%= item.type %>">
+                
+                <button id='saveFood'>DELETE</button>
+            </form>
+
+
+
+        </section>
+
+        <%       
+                 })
+            }
+            else{ %>
+
+        <h2>You Don't have and Food or drink in your favorite list. <br>
+        Feel free to go into the search form and  <a href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
+        </h2>
+        <% }%>
+
+        
+    </section>
+
+</main>
+
+<script src="./js/app.js"></script>
+</body>
+
+</html>
