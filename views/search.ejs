@@ -7,18 +7,22 @@
 </head>
 <body>
     
-    <form action="/searchFood" method="POST">
+    <header>
+        <%- include('./layout/nav.ejs')%>
+    </header>
+    
+    <form action="/searchFood?id=<%=id%>" method="POST">
         <input type="text" name="firstIngredient" placeholder="first" >
         <input type="text" name="secondIngredient" placeholder='second' >
-        <input type="text" name="thirdIngredient" placeholder='second'>
+        <input type="text" name="thirdIngredient" placeholder='third'>
         <button> submit food</button>
     </form>
 
 
-    <form action="/searchDrink" method="POST">
+    <form action="/searchDrink?id=<%=id%>" method="POST">
         <input type="text" name="firstIngredient" placeholder="first" >
         <input type="text" name="secondIngredient" placeholder='second' >
-        <input type="text" name="thirdIngredient" placeholder='second'>
+        <input type="text" name="thirdIngredient" placeholder='third'>
         <button> sumbmit drink</button>
     </form>
 

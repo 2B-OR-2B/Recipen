@@ -48,6 +48,8 @@ app.get('/testResult', (req, res) => {
             }]
     })
 })
+app.get('/sign',(req,res)=>{res.render('register')})
+
 
 // handler functions
 
@@ -63,7 +65,8 @@ function signInHandler(req, res) {
     client.query(SQL, values).then((data) => {
 
         if (data.rows.length) {
-            res.render('index', { user: data.rows[0] })
+            // res.render('index', { user: data.rows[0] })
+            res.redirect(`/?id=${data.rows[0].id}`);
 
         }
         else {
@@ -85,7 +88,8 @@ function signUpHandler(req, res) {
     let SQL = `INSERT INTO users (firstName,lastName,email,password) VALUES ($1,$2,$3,$4) RETURNING *;`;
     let values = [firstName, lastName, email, pass];
     client.query(SQL, values).then(data => {
-        res.render('index', { user: data.rows[0] })
+        // res.render('index', { user: data.rows[0] })
+        res.redirect(`/?id=${data.rows[0].id}`)
 
     })
         .catch(e => { errorHandler(`Email is already exists..${e}`, req, res) })
@@ -99,19 +103,27 @@ function detailsHandler(req, res) {
 
     res.render('detailsResults', { obj: req.body })
 }
-
+// sessionStorage.setItem("","");
+// sessionStorage.getItem("");
 function homePageHandler(req, res) {
-    let urlFood = `https://www.themealdb.com/api/json/v1/1/random.php`;
-    let cocktailUrl = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
-    let dessertUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert`;
-
-    superagent.get(urlFood).then(foodResult => {
-        superagent.get(cocktailUrl).then(cocktailResult => {
-            superagent.get(dessertUrl).then(dessertResult => {
-                res.render('index', { cocktail: cocktailResult.body, food: foodResult.body, dessert: dessertResult.body })
+    let id = req.query.id || -1;
+    let SQL = 'SELECT * FROM users WHERE id = $1';
+    let values =[id];
+    
+    client.query(SQL,values).then(data=>{
+        let urlFood = `https://www.themealdb.com/api/json/v1/1/random.php`;
+        let cocktailUrl = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
+        let dessertUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert`;
+    
+        superagent.get(urlFood).then(foodResult => {
+            superagent.get(cocktailUrl).then(cocktailResult => {
+                superagent.get(dessertUrl).then(dessertResult => {
+                    res.render('index', { cocktail: cocktailResult.body, food: foodResult.body, dessert: dessertResult.body, user:data.rows[0]})
+                })
             })
         })
     })
+
 }
 
 function saveFoodHandler(req, res) {
@@ -173,11 +185,13 @@ function Drinks(drinkObj) {
 
 
 function searchPageHandler(req, res) {
-    res.render('search');
+    let id = req.query.id;
+    res.render('search',{id:id});
 }
 
 
 function searchFoodHandler(req, res) {
+    let id = req.query.id; // send it within the render method to the result page...
     // req.body()=> data from form
     let firstIngredient = req.body.firstIngredient;
     let secondIngredient = req.body.secondIngredient;
@@ -236,6 +250,7 @@ function searchFoodHandler(req, res) {
 
 
 function searchDrinkHandler(req, res) {
+    let id = req.body.id; // send it within the render method to the result page...
     let firstIngredient = req.body.firstIngredient;
     let secondIngredient = req.body.secondIngredient;
     let thirdIngredient = req.body.thirdIngredient;

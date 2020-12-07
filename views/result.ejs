@@ -23,9 +23,10 @@
                 4 details button ( go to details page)
                 5 add to fav ==> user id ( sessions ) => store in db
                 
+                id should be recieved from search page.. ( id ) for user id.
              -->
             <% 
-        
+             
             let type =suggestions[0]?suggestions[0].type : 'None';
             let myData = data || suggestions || [];
             if (myData.length){
@@ -35,7 +36,8 @@
                    <% }
                     myData.forEach(item=>{ %>
                    
-                    <section class="item"> 
+                    <section class="item">
+                         <!--add the id to the routes .. saveFood and saveDrink as query params  -->
                         <% let action = type==='food'? "/saveFood" : "/saveDrink"  %>
                         <form action="<%=action%>" method="POST">
                             <button><i class="star far fa-star"></i></button>
