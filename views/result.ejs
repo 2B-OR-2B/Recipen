@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-    <title>Results</title>
-</head>
+<%- include('./layout/head.ejs')%>
 <body>
-    
 
-    <header></header>
-    <main>
+<%- include('./layout/nav.ejs')%>
 
-        <section class="resultContainer">
+<main>
 
-           
-            <% 
+    <section class="resultContainer">
+
+
+        <% 
 
             let type =suggestions[0]?suggestions[0].type : 'None';
             let myData = data || suggestions || [];
@@ -24,144 +16,85 @@
            
             if (myData.length){
                     if( ! data.length){ %>
-                        <h2>There is no matched result for your request.<br>here is some suggested result based on your main ingredient (The first one). </h2>
+        <h2>There is no matched result for your request.<br>here is some suggested result based on your main ingredient
+            (The first one). </h2>
 
-                   <% }
+        <% }
                     myData.forEach(item=>{ 
                         idsArray.push(item.id);
                     %>
-                   
-                    <section class="item">
-                        
 
-                        
-                        
+        <section class="item">
 
 
 
-                        <form action="/details" method="POST">
-                            <img src=<%= item.img_url %> >
-                            <p><%= item.name %> </p>
-                            <p><%= item.category %></p>
-                            <button>SHOW DETAILS</button>
-
-                            <input type="hidden" name="id" value="<%= item.id %>" >
-                            <input type="hidden" name="name" value="<%= item.name %>" >
-                            <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
-                            <input type="hidden" name="steps" value= "<%= item.steps %>" > 
-                            <input type="hidden" name="img_url" value="<%= item.img_url %>">
-                            <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
-                            <input type="hidden" name="category" value="<%= item.category %>">
-                            <input type="hidden" name="type" value="<%= item.type %>">
-
-                            <% if(type==="food"){ %>
-                                
-                                <input type="hidden" name="area" value="<%= item.area %>">
-                           <% }   %>
-                            
-                          
-
-                        </form>
-
-
-                        <% let action = type==='food'? "/saveFood" : "/saveDrink"  %>
-                        <form id="<%=item.id%>" action="" method="POST">
-                            <button id='saveFood'>ADD TO FAVORITES</button>
-                            <input type="hidden" name="id" value="<%= item.id %>" >
-                            <input type="hidden" name="name" value="<%= item.name %>" >
-                            <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
-                            <input type="hidden" name="steps" value= "<%= item.steps %>" > 
-                            <input type="hidden" name="img_url" value="<%= item.img_url %>">
-                            <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
-                            <input type="hidden" name="category" value="<%= item.category %>">
-                            <input type="hidden" name="type" value="<%= item.type %>">
-                            <input type="hidden" name="route" value ="<%=action%>?id=<%=id%>">
-                            <% if(type==="food"){ %> 
-                                <input type="hidden" name="area" value="<%= item.area %>">
-                           <% }   %>
-                        </form>
 
 
 
-                    </section>
 
-            <%       
+            <form action="/details" method="POST">
+                <img src=<%= item.img_url %>>
+                <p><%= item.name %> </p>
+                <p><%= item.category %></p>
+                <button>SHOW DETAILS</button>
+
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <input type="hidden" name="name" value="<%= item.name %>">
+                <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
+                <input type="hidden" name="steps" value="<%= item.steps %>">
+                <input type="hidden" name="img_url" value="<%= item.img_url %>">
+                <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
+                <input type="hidden" name="category" value="<%= item.category %>">
+                <input type="hidden" name="type" value="<%= item.type %>">
+
+                <% if(type==="food"){ %>
+
+                <input type="hidden" name="area" value="<%= item.area %>">
+                <% }   %>
+
+
+
+            </form>
+
+
+            <% let action = type==='food'? "/saveFood" : "/saveDrink"  %>
+            <form id="<%=item.id%>" action="" method="POST">
+                <button id='saveFood'>ADD TO FAVORITES</button>
+                <input type="hidden" name="id" value="<%= item.id %>">
+                <input type="hidden" name="name" value="<%= item.name %>">
+                <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
+                <input type="hidden" name="steps" value="<%= item.steps %>">
+                <input type="hidden" name="img_url" value="<%= item.img_url %>">
+                <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
+                <input type="hidden" name="category" value="<%= item.category %>">
+                <input type="hidden" name="type" value="<%= item.type %>">
+                <input type="hidden" name="route" value="<%=action%>?id=<%=id%>">
+                <% if(type==="food"){ %>
+                <input type="hidden" name="area" value="<%= item.area %>">
+                <% }   %>
+            </form>
+
+
+
+        </section>
+
+        <%       
                  })
             }
             else{ %>
 
-                <h2>There is no matched results.. try again with different ingredients. <a href="./search.ejs">SEARCH AGAIN</a> </h2>   
-           <% }
+        <h2>There is no matched results.. try again with different ingredients. <a href="./search.ejs">SEARCH AGAIN</a>
+        </h2>
+        <% }
            let idsSt= idsArray.join();
                   %>
 
-                <input id="meals" type="hidden" name="ids"value="<%=idsSt %>">
-        </section>
+        <input id="meals" type="hidden" name="ids" value="<%=idsSt %>">
+    </section>
 
-    </main>
-    <footer></footer>
-    <script>
-        
-         let st = document.getElementById('meals').value;
-         let idArray=st.split(',');
-         console.log(idArray);
-
-         idArray.forEach(element => {
-             document.getElementById(element).addEventListener('click',function sendQuery(event){
-               if(event.target.id==='saveFood'){
-                  event.preventDefault();
-              let form = event.target.parentNode;
-              let obj={
-                id : form.id.value,
-                name : form.name.value,
-               ingredients : form.ingredients.value,
-               steps : form.steps.value,
-               img_url : form.img_url.value,
-               vid_url : form.vid_url.value,
-               category : form.category.value,
-               type : form.type.value,
-               route: form.route.value
-              }
-              let  url=`http://localhost:3000${obj.route}`;
-              console.log(url);
-              if(obj.type==='food'){
-                  obj['area']= form.area.value;
-                 
-              }
-
-
-              console.log(obj)
-              fetch(url,{
-                            method: 'POST', 
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(obj),
-                            })
-                            .then(response=>response.json())
-                            .then(data=>{
-                                if(data!== 'done'){
-                                    alert('Already Exists In Your Favorite List');
-                                }
-                                else{
-                                    alert('Added To Your Favorite List');
-                                }
-                                console.log(data)})
-                            .catch(e=>console.log(e));
-
-
-            }
-             
-               
-              
-
-
-
-             });
-             
-         });
-    </script>
-
-    <script src="./js/app.js"></script>
+</main>
+<%- include('./layout/footer.ejs') %>
+<script src="./js/app.js"></script>
 </body>
+
 </html>

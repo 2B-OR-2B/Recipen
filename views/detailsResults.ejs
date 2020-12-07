@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>detailsresults</title>
-</head>
+<%- include('./layout/head.ejs')%>
+    
 <body>
-    <header></header>
+<%- include('./layout/nav.ejs')%>
     <main>
         <section>
             <img src="<%=obj.img_url%>" > 
@@ -41,6 +36,8 @@
 
         </section>
     </main>
-    
+    <%- include('./layout/footer.ejs') %>
+    <script src="./js/app.js"></script>
 </body>
+
 </html>
