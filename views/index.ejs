@@ -1,32 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-</head>
-<body>
-    <%
+<%- include('./layout/head.ejs') %>
+<%
     userData = user? user : '';
     id= userData? userData.id : '';
     %>
 
-    <header>
-        <%- include('./layout/nav.ejs') %>
+<%- include('./layout/nav.ejs') %>
 
-    </header>
+<main>
+    <section claas="intro">
+        <div>
+            <img src="" alt="">
+        </div>
+        <div>
+            <p></p>
+        </div>
+    </section>
+    <section class="trans">
 
+    </section>
+    <section class="rand-recipe">
 
-    <h1>Welocme here</h1>
-    <h2><%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMeal%></h2>
-   <img src=<%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMealThumb%>>
+        <div>
+            <h2><%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMeal%></h2>
+            <img src=<%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMealThumb%>>
+        </div>
+        <div>
+            <h2><%=cocktail.drinks[0].strDrink%></h2>
+            <img src=<%=cocktail.drinks[0].strDrinkThumb%>>
+        </div>
+        <div>
+            <h2><%=food.meals[0].strMeal%></h2>
+            <img src=<%=food.meals[0].strMealThumb%>>
 
+        </div>
+    </section>
+</main>
 
-   <h2><%=cocktail.drinks[0].strDrink%></h2>
-   <img src=<%=cocktail.drinks[0].strDrinkThumb%>>
-
-   <h2><%=food.meals[0].strMeal%></h2>
-   <img src=<%=food.meals[0].strMealThumb%>>
-    
-</body>
-</html>
+<%- include('./layout/footer.ejs') %>

@@ -1,11 +1,19 @@
-<nav>
-    <% if(!id){
-        id='';
-    }%>
-    <ul>
-        <li><a href="/?id=<%=id%>">HOME</a></li>
-        <li><a href="/searchPage?id=<%=id%>">SEARCH</a></li>
-        <li><a href="">FAVORITES</a></li>
+<header>
+    <nav>
+        <% if(!id){
+            id='';
+        }%>
+        <ul>
 
-    </ul>
-</nav>
+            <li><a href="/?id=<%=id%>"> Home<i class="fas fa-house-user" style="height: 50px;width: 50px;"></i></a></i></li>
+            <li><a href="/searchPage?id=<%=id%>">SEARCH</a></li>
+            <li><a href="">FAVORITES</a></li>
+    
+        </ul>
+        <span>
+        <i class="fas fa-disease"></i>
+        <img src="" alt="" srcset="">
+        </span>
+    </nav>
+    <h1>Welocme here</h1>
+</header>

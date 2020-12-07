@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>search</title>
-</head>
-<body>
+<%- include('./layout/head.ejs')%>
     
-    <header>
-        <%- include('./layout/nav.ejs')%>
-    </header>
+
+<%- include('./layout/nav.ejs')%>
     
     <form action="/searchFood?id=<%=id%>" method="POST">
         <input type="text" name="firstIngredient" placeholder="first" >
@@ -26,5 +18,4 @@
         <button> sumbmit drink</button>
     </form>
 
-</body>
-</html>
+    <%- include('./layout/footer.ejs')%>
