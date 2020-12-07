@@ -1,0 +1,18 @@
+.searchPageBody{
+    /* background-image: url(''); */
+}
+
+.searchForms{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.firstIngredient, .secondIngredient, .thirdIngredient{
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.searchDrinkDiv button{
+width:70%;
+
+}

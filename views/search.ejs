@@ -1,22 +1,36 @@
 <%- include('./layout/head.ejs')%>
-    
-<body>
-    
-    <form action="/searchFood?id=<%=id%>" method="POST">
-        <input type="text" name="firstIngredient" placeholder="first" >
-        <input type="text" name="secondIngredient" placeholder='second' >
-        <input type="text" name="thirdIngredient" placeholder='third'>
-        <button> submit food</button>
-    </form>
 
-
-    <form action="/searchDrink?id=<%=id%>" method="POST">
-        <input type="text" name="firstIngredient" placeholder="first" >
-        <input type="text" name="secondIngredient" placeholder='second' >
-        <input type="text" name="thirdIngredient" placeholder='third'>
-        <button> sumbmit drink</button>
-    </form>
-
+<body class="searchPageBody">
+    <section class="searchForms">
+        <div id="searchFoodDiv">
+            <form action="/searchFood?id=<%=id%>" method="POST">
+                <div class="firstIngredientfoodDiv">
+                    <input class="firstIngredient" type="text" name="firstIngredient" placeholder="Enter first ingredient" required>
+                </div>
+                <div class="secondIngredientfoodDiv">
+                    <input class='secondIngredient' type="text" name="secondIngredient" placeholder='Enter second ingredient'>
+                </div>
+                <div class="thirdIngredientFoodDiv">
+                    <input class="thirdIngredient" type="text" name="thirdIngredient" placeholder='Enter third ingredient'>
+                </div>
+                <button> Search for food</button>
+            </form>
+        </div>
+        <div id="searchDrinkDiv">
+            <form action="/searchDrink?id=<%=id%>" method="POST">
+                <div class="firstIngredientDrinkDiv">
+                    <input class="firstIngredient" type="text" name="firstIngredient" placeholder="Enter first ingredient" required>
+                </div>
+                <div class="secondIngredientDrinkDiv">
+                    <input class="secondIngredient" type="text" name="secondIngredient" placeholder='Enter second ingredient'>
+                </div>
+                <div class="thirdIngredientDrinkDiv">
+                    <input class="thirdIngredient" type="text" name="thirdIngredient" placeholder='Enter third ingredient'>
+                </div>
+                <button> Search for drink</button>
+            </form>
+        </div>
+    </section>
     <%- include('./layout/footer.ejs') %>
     <script src="./js/app.js"></script>
 </body>
