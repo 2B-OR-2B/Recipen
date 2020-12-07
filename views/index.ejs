@@ -3,42 +3,42 @@
     userData = user? user : '';
     id= userData? userData.id : '';
     %>
-<body>
+<body >
 <%- include('./layout/nav.ejs') %>
 <div class="header" >
     <div class="greeting">
-        <h1>Welocme here</h1>
+        <span>
+            <h1>Recipen</h1>
+            <p> Welcome to Recipen </p>
+        </span>
     </div>
 </div>
-<main>
-    <section claas="intro">
-        <div>
-            <img src="" alt="">
+<section class="index-main">
+    <!-- <div claas="intro">
+        <div class="about">
+            <img src="../img/header.jpg" style="width: 300px; height: 500px;">
         </div>
-        <div>
-            <p></p>
+        <div class="about">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing <br> Dolores eveniet qui est recusandae officia repudiandae suscipit laudantium? Hic dolorum expedita,<br> dignissimos vero eius nisi ex ipsa! Natus iure molestiae</p>
         </div>
-    </section>
-    <section class="trans">
-
-    </section>
+    </div> -->
     <section class="rand-recipe">
 
-        <div>
-            <h2><%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMeal%></h2>
-            <img src=<%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMealThumb%>>
+        <div class="about">
+            <h2 class="img__description" ><%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMeal%></h2>
+            <img class="randomImgHome" src=<%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMealThumb%>>
         </div>
-        <div>
-            <h2><%=cocktail.drinks[0].strDrink%></h2>
-            <img src=<%=cocktail.drinks[0].strDrinkThumb%>>
-        </div>
-        <div>
-            <h2><%=food.meals[0].strMeal%></h2>
-            <img src=<%=food.meals[0].strMealThumb%>>
+        <div class="about">
+            <h2 class="img__description"><%=cocktail.drinks[0].strDrink%></h2>
+            <img class="randomImgHome" src=<%=cocktail.drinks[0].strDrinkThumb%>>
+        </div>                                       
+        <div class="about">
+            <h2 class="img__description"><%=food.meals[0].strMeal%></h2>
+            <img class="randomImgHome" src=<%=food.meals[0].strMealThumb%>>
 
         </div>
     </section>
-</main>
+</section>
 <%- include('./layout/footer.ejs') %>
     <script src="./js/app.js"></script>
 </body>
