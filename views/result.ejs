@@ -15,9 +15,11 @@
            
             if (myData.length){
                     if( ! data.length){ %>
-              <div class="notify">  <h2>There is no matched result for your request.<br>here is some suggested result based on your main
-                    ingredient
-                    (The first one). </h2> </div>
+                <div class="notify">
+                    <h2>There is no matched result for your request.<br>here is some suggested result based on your main
+                        ingredient
+                        (The first one). </h2>
+                </div>
 
                 <% }
                     myData.forEach(item=>{ 
@@ -33,7 +35,7 @@
                                 <p><%= item.category %></p>
                             </div>
 
-                            
+
                             <input type="hidden" name="id" value="<%= item.id %>">
                             <input type="hidden" name="name" value="<%= item.name %>">
                             <input type="hidden" name="ingredients" value="<%= item.ingredients %>">
@@ -42,15 +44,15 @@
                             <input type="hidden" name="vid_url" value="<%= item.vid_url %>">
                             <input type="hidden" name="category" value="<%= item.category %>">
                             <input type="hidden" name="type" value="<%= item.type %>">
-                            
+
                             <% if(type==="food"){ %>
-                                
-                                <input type="hidden" name="area" value="<%= item.area %>">
-                                <% }   %>
-                                
-                                
-                             <button class="btn">SHOW DETAILS</button>
-                                
+
+                            <input type="hidden" name="area" value="<%= item.area %>">
+                            <% }   %>
+
+
+                            <button class="btn">SHOW DETAILS</button>
+
 
 
                         </form>
@@ -68,8 +70,8 @@
                             <input type="hidden" name="type" value="<%= item.type %>">
                             <input type="hidden" name="route" value="<%=action%>?id=<%=id%>">
                             <% if(type==="food"){ %>
-                                <input type="hidden" name="area" value="<%= item.area %>">
-                                <% }   %>
+                            <input type="hidden" name="area" value="<%= item.area %>">
+                            <% }   %>
                             <button id='saveFood' class="btn">ADD TO FAVORITES</button>
                         </form>
                     </div>
@@ -79,22 +81,23 @@
 
                 <%       
                  })
-            }
-            else{ %>
+             }
+             else{ %>
 
-        <h2>There is no matched results.. try again with different ingredients. <a href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
-        </h2>
-        <% }
-           let idsSt= idsArray.join();
+                <h2>There is no matched results.. try again with different ingredients. <a
+                        href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
+                </h2>
+                <% }
+             let idsSt= idsArray.join();
                   %>
 
-        <input id="meals" type="hidden" name="ids" value="<%=idsSt %>">
-    </section>
-    </div>
-</main>
-<%- include('./layout/footer.ejs') %>
-<script src="./js/app.js"></script>
-<script src="./js/app_result.js"></script>
+                <input id="meals" type="hidden" name="ids" value="<%=idsSt %>">
+            </section>
+        </div>
+    </main>
+    <%- include('./layout/footer.ejs') %>
+    <script src="./js/app.js"></script>
+    <script src="./js/app_result.js"></script>
 </body>
 
 </html>

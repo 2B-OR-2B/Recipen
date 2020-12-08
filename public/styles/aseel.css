@@ -1,3 +1,5 @@
+
+/* result css  */
 .card {
     /* Add shadows to create the "card" effect */
   text-align: center;
@@ -5,13 +7,7 @@
     width: 50%;
     height: 50%;
     
-}
-
- /* On mouse-over, add a deeper shadow */
- .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
+}  
   /* Add some padding inside the card container */
   .container {
     padding: 2px 16px;
@@ -21,7 +17,7 @@
 
   }
   .resultContainer{ 
-        display: flex;
+    display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     flex-wrap: wrap;
@@ -48,7 +44,7 @@
       box-shadow: 10px 10px rgba(27, 24, 24, 0.5) ;
       background-color: burlywood;
       padding-bottom: 1%;
-      
+margin-top: 10%;      
   }
 .parent{
     display: flex;
@@ -57,7 +53,7 @@
 }
 
 
-  .btn{  
+  .btn,#saveFood{  
     text-align: center;
   cursor: pointer;
   font-size:10px;
@@ -70,17 +66,43 @@
     transition-duration: 0.4s;
     overflow: hidden;
 }
-.btn:hover{
+.btn:hover,#saveFood:hover{
     color:#DDDDDD;
     border-color:#DDDDDD;
     }
-    .btn:active{
+    .btn:active,#saveFood:active{
     color:#BBBBBB;
  border-color:#BBBBBB;
     }
   
+    /* end of css result page  */
 
 
+/* 
+    favourite css  */
+  
+    /* .parent2{
+      display: flex;
+      justify-content: center;
+      
+  }
+
+  .card2 {
+    /* Add shadows to create the "card" effect */
+  /* text-align: center;
+    transition: 0.3s;
+    width: 70%;
+   
+    
+}
+
+.card2 img{
+  width: 90%;
+  height: 90%;
+  padding: 10%;
+  
+} */ */
+    /* end of favorite css */
 
 
 
@@ -294,11 +316,11 @@
   /**
    * Signin and signup forms
    */
-.user_unregistered-signup, 
+/* .user_unregistered-signup, 
 .user_registered-login{
 
 
-}
+} */
    
   .user_options-forms {
     position: absolute;
