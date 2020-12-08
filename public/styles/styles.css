@@ -1,7 +1,7 @@
 @import url('../styles/mhmd.css');
 @import url('../styles/aseel.css');
 
-.star{
+.fa-star{
     color:yellow;
 }
 
@@ -12,23 +12,29 @@
         background-repeat: no-repeat;
         background-size: cover;
         height: 100%;
-        overflow: hidden;
-        overflow-y: scroll;
+        overflow-x: hidden;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 0 0 0;
+        padding: 0;
+      
     }
     .header{
         width: 100%;
-        background-image: linear-gradient(to right, rgb(189, 204, 206,0.8) 20%,
-        rgb(0, 0, 0,0.2)80%),url('../img/madmax-chef-XGRUl2r7i7g-unsplash.jpg') ;
+        background-image: linear-gradient(to right, rgba(220, 229, 230, 0.514) 20%,
+        rgb(0, 0, 0,0.2)80%),url('../img/straw.jpg') ;
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
-        height: 500px;
-        /* line-height: 600px; */
-        padding-left:5%;
-        margin-bottom: 30%;
+        height: 650px;
+        padding-left:2%;
+        /* padding-bottom: 5%; */
+        /* margin-bottom: 25%; */
 
     }
     .nav {
@@ -98,8 +104,12 @@
      display: flex;
      flex-direction: row;
      justify-content: space-evenly;
+     flex-wrap: wrap;
      background-color: white;
      padding-top: 1%;
+     }
+     .rand-recipe h2{
+         width: 100%;
      }
      .randomImgHome{
          width: 100%;
@@ -110,9 +120,9 @@
         position: relative;
          width: 25%;
          height: 80%;
-        box-shadow: 15px 15px 15px 20px rgba(0, 0, 0,0.7);
-     }
+        box-shadow: 0 6px 18px rgb(0, 0, 0);
 
+     }
      .img__description {
         position: absolute;
         top: 0;
@@ -120,13 +130,14 @@
         left: 0;
         right: 0;
         width: 100%;
-        height: 96%;
+        height: 56%;
         background: rgba(182, 179, 32, 0.72);
         color: #fff;
         visibility: hidden;
-        opacity: 0;
+         opacity: 0;
+         padding-top: 50%;
         /* transition effect. not necessary */
-        transition: all 0.4s ease-in-out 0s;
+        transition: all 0.7s ease-in-out 0s;
         /* transition: opacity .2s, visibility .2s; */
       }
 
@@ -134,9 +145,36 @@
         visibility: visible;
         opacity: 1;
       }
-
-
-    
+    #intsection{
+        height: 70%;
+         width: 100%;
+         background-color: white;
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         /* margin-bottom: 25%; */
+         padding-top: 7%;
+         padding-bottom: 7%;
+     }
+     .introduction{
+      width: 40%;
+     }
+     .introduction img{
+         width: 100%;
+         height: 100%;
+         box-shadow: 5px 5px orangered;
+     }
+    #transparent{
+        width: 100%;
+        height: 30%;
+        padding: 20% 0;
+    }
+    /* #transparent p{
+        margin-top: 15%;
+    } */
+    #transparent p,h2{
+        text-align: center;
+    }
     #map{
         height: 200px;
         width: 300px;
