@@ -2,37 +2,53 @@
 <%
     userData = user? user : '';
     id= userData? userData.id : '';
-%>
-<body >
-<%- include('./layout/nav.ejs') %>
-<div class="header" >
-    <div class="greeting">
-        <span>
-            <h1>Recipen</h1>
-            <p> Welcome to Recipen </p>
-        </span>
+    %>
+
+<body>
+    <%- include('./layout/nav.ejs') %>
+    <div class="header">
+        <div class="greeting">
+            <span>
+                <h1>Recipen</h1>
+                <p> Welcome to Recipen </p>
+            </span>
+        </div>
     </div>
-</div>
-<section class="index-main">
-   
-    <section class="rand-recipe">
-
-        <div class="about">
-            <h2 class="img__description" ><%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMeal%></h2>
-            <img class="randomImgHome" src=<%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMealThumb%>>
+    <section class="index-main">
+        <div id="intsection">
+            <div class="introduction">
+                <p><strong>introduction About Recipen</strong><br> Lorem ipsum dolor sit amet consectetur adipisicing <br> Dolores eveniet qui est recusandae officia
+                    repudiandae suscipit laudantium? Hic dolorum expedita,<br> dignissimos vero eius nisi ex ipsa! Natus
+                    iure molestiae Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos repellendus, iste vel vero eius fugiat provident? Cupiditate rerum ducimus porro nulla magni, voluptatem eveniet ipsam sint veniam aut unde atque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Non maiores voluptatem, vitae eum facilis delectus asperiores natus aperiam quo distinctio doloremque tempora totam perspiciatis hic corrupti! Doloremque architecto similique inventore.</p>
+                    <button ><a href="">Our Team</a></button>
+            </div>
+            <div class="introduction">
+                <img src="../img/header.jpg">
+            </div>
         </div>
-        <div class="about">
-            <h2 class="img__description"><%=cocktail.drinks[0].strDrink%></h2>
-            <img class="randomImgHome" src=<%=cocktail.drinks[0].strDrinkThumb%>>
-        </div>                                       
-        <div class="about">
-            <h2 class="img__description"><%=food.meals[0].strMeal%></h2>
-            <img class="randomImgHome" src=<%=food.meals[0].strMealThumb%>>
-
+        <div id="transparent">
+         <p>" If you're not the one cooking, stay out of the way and compliment the chef. "</p>
+         <h2> Michael Strahan</h2>
         </div>
+        <section class="rand-recipe">
+           <h2>Recipies Of The Day</h2>
+            <div class="about">
+                <h2 class="img__description"><%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMeal%></h2>
+                <img class="randomImgHome"
+                    src=<%=dessert.meals[Math.floor(Math.random() * (60 - 2) + 2)].strMealThumb%>>
+            </div>
+            <div class="about">
+                <h2 class="img__description"><%=cocktail.drinks[0].strDrink%></h2>
+                <img class="randomImgHome" src=<%=cocktail.drinks[0].strDrinkThumb%>>
+            </div>
+            <div class="about">
+                <h2 class="img__description"><%=food.meals[0].strMeal%></h2>
+                <img class="randomImgHome" src=<%=food.meals[0].strMealThumb%>>
+
+            </div>
+        </section>
     </section>
-</section>
-<%- include('./layout/footer.ejs') %>
+    <%- include('./layout/footer.ejs') %>
     <script src="./js/app.js"></script>
 </body>
 
