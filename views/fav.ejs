@@ -5,8 +5,8 @@
     <%- include('./layout/nav.ejs')%>
 
 
-    <main>
-        <div class="parent" >
+    <main class="result">
+
             <section class="resultContainer">
                 <% 
 
@@ -22,12 +22,12 @@
             let myData = foods.concat(drinks);
             
            
-            if (myData.length){
-                    
-                    myData.forEach(item=>{  %>
+            if (myData.length){ %>
+
+                <div class="itemsGrid">
+                 <%   myData.forEach(item=>{  %>
 
                 <section class="item">
-                    <div class="card">
                         <form action="/details?id=<%=id%>" method="POST">
                             <img src=<%= item.img_url %>>
                             <div class="container">
@@ -67,20 +67,22 @@
                     </section>
 
                 <%       
-                 })
-            }
+                 }) %>
+                </div>
+           <% }
             else{ %>
-
-                <h2>You Don't have any Food or Drink in your favorite list. <br>
-                    Feel free to go to the search form and <a href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
-                </h2>
+                <div class="notify">
+                    <h2>You Don't have any Food or Drink in your favorite list. <br>
+                        Feel free to go to the search form and <br> <a href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
+                    </h2>
+                </div>
                 <% }%>
 
 
             </section>
-        </div>
-    </main>
 
+    </main>
+    <%- include('./layout/footer.ejs') %>
     <script src="./js/app.js"></script>
 </body>
 

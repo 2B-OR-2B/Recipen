@@ -4,8 +4,7 @@
 
     <%- include('./layout/nav.ejs')%>
 
-    <main>
-        <div class="parent">
+    <main class="result">
             <section class="resultContainer">
                 <% 
 
@@ -20,14 +19,16 @@
                         ingredient
                         (The first one). </h2>
                 </div>
-
-                <% }
-                    myData.forEach(item=>{ 
+                
+                
+                <% } %>
+                <div class="itemsGrid">
+                <%    myData.forEach(item=>{ 
                         idsArray.push(item.id);
                     %>
 
                 <section class="item">
-                    <div class="card">
+                   
                         <form action="/details?id=<%=id%>" method="POST">
                             <img src=<%= item.img_url %>>
                             <div class="container">
@@ -74,17 +75,14 @@
                             <% }   %>
                             <button id='saveFood' class="btn saveFood">ADD TO FAVORITES</button>
                         </form>
-                    </div>
-
-
                 </section>
 
-                <%       
-                 })
-             }
+                <% })%>
+            </div>
+            <% }
              else{ %>
                 <div class="notify">
-                    <h2>There is no matched results.. try again with different ingredients. <a
+                    <h2>There is no matched results.. try again with different ingredients.<br> <a
                             href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
                     </h2>
                  </div>
@@ -94,7 +92,6 @@
 
                 <input id="meals" type="hidden" name="ids" value="<%=idsSt %>">
             </section>
-        </div>
     </main>
     <%- include('./layout/footer.ejs') %>
     <script src="./js/app.js"></script>
