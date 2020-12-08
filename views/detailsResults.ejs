@@ -30,7 +30,7 @@
                 let ext=vid.indexOf('v=') !== -1 ? vid.substring(vid.indexOf('v=')+2) 
                                                  : vid.substring(vid.indexOf('be/')+3);
                 let url = `https://www.youtube.com/embed/${ext}`
-                %>
+            %>
             <iframe width="560" height="315" src="<%= url%> " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <% } %>    
 
