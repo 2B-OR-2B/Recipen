@@ -54,22 +54,17 @@
 
 
                         </form>
+                        <form id="<%=item.id%>" action="/deleteFav?id=<%=id%>&_method=delete" method="POST">
+                            <input type="hidden" name="id" value="<%= item.id %>">
+                            <input type="hidden" name="type" value="<%= item.type %>">
 
+                            <button class='saveFood'>DELETE</button>
 
-                        <div id="deleteForm">
-
-                            <form id="<%=item.id%>" action="/deleteFav?id=<%=id%>&_method=delete" method="POST">
-                                <input type="hidden" name="id" value="<%= item.id %>">
-                                <input type="hidden" name="type" value="<%= item.type %>">
-
-                                <button id='saveFood'>DELETE</button>
-
-                            </form>
-                        </div>
+                        </form>
+                    
 
 
                     </section>
-                </section>
 
                 <%       
                  })

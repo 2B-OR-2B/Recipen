@@ -72,7 +72,7 @@
                             <% if(type==="food"){ %>
                             <input type="hidden" name="area" value="<%= item.area %>">
                             <% }   %>
-                            <button id='saveFood' class="btn">ADD TO FAVORITES</button>
+                            <button id='saveFood' class="btn saveFood">ADD TO FAVORITES</button>
                         </form>
                     </div>
 
@@ -83,10 +83,11 @@
                  })
              }
              else{ %>
-
-                <h2>There is no matched results.. try again with different ingredients. <a
-                        href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
-                </h2>
+                <div class="notify">
+                    <h2>There is no matched results.. try again with different ingredients. <a
+                            href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
+                    </h2>
+                 </div>
                 <% }
              let idsSt= idsArray.join();
                   %>

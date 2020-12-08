@@ -53,7 +53,7 @@ margin-top: 10%;
 }
 
 
-  .btn,#saveFood{  
+  .btn,.saveFood{  
     text-align: center;
   cursor: pointer;
   font-size:10px;
@@ -66,11 +66,11 @@ margin-top: 10%;
     transition-duration: 0.4s;
     overflow: hidden;
 }
-.btn:hover,#saveFood:hover{
+.btn:hover,.saveFood:hover{
     color:#DDDDDD;
     border-color:#DDDDDD;
     }
-    .btn:active,#saveFood:active{
+    .btn:active,.saveFood:active{
     color:#BBBBBB;
  border-color:#BBBBBB;
     }
@@ -123,7 +123,7 @@ margin-top: 10%;
      .user input[type="submit"] {
         cursor: pointer;
       }
-     .user input::-webkit-input-placeholder {
+     /* .user input::-webkit-input-placeholder {
         font-size: 0.85rem;
         font-family: "Montserrat", sans-serif;
         font-weight: 300;
@@ -150,7 +150,7 @@ margin-top: 10%;
         font-weight: 300;
         letter-spacing: 0.1rem;
         color: #ccc;
-      }
+      } */
       .user input::placeholder {
         font-size: 0.85rem;
         font-family: "Montserrat", sans-serif;
@@ -290,8 +290,9 @@ margin-top: 10%;
   
   .user_unregistered-text,
   .user_registered-text {
-    font-size: 0.83rem;
+    font-size: 1rem;
     line-height: 1.4em;
+    text-align: center;
   }
   
   .user_registered-login,
@@ -300,7 +301,7 @@ margin-top: 10%;
     border: 1px solid #ccc;
     border-radius: 3px;
     padding: 10px 30px;
-    color: #fff;
+    color: black;
     text-transform: uppercase;
     line-height: 1em;
     letter-spacing: 0.2rem;
@@ -327,7 +328,7 @@ margin-top: 10%;
     top: 50%;
     left: 30px;
     width: calc(50% - 30px);
-    min-height: 460px;
+    min-height:450px;
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
@@ -356,19 +357,26 @@ margin-top: 10%;
     margin-bottom: 20px;
   }
   .user_options-forms .forms_field-input {
-    width: 100%;
-    border-bottom: 1px solid #ccc;
-    padding: 6px 20px 6px 6px;
+    width: 90%;
+    border: none;
+    border-bottom:2px solid #66585881;
+    padding: 8px 15px;
     font-family: "Montserrat", sans-serif;
-    font-size: 1rem;
+    font-size: 1.2em;
     font-weight: 300;
-    color: gray;
+    color: rgb(29, 27, 27);
     letter-spacing: 0.1rem;
     -webkit-transition: border-color 0.2s ease-in-out;
     transition: border-color 0.2s ease-in-out;
   }
   .user_options-forms .forms_field-input:focus {
-    border-color: gray;
+    /* border-color: gray; */
+    background-color:#e47874;
+    color:whitesmoke;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    
   }
   .user_options-forms .forms_buttons {
     display: -webkit-box;
@@ -392,7 +400,7 @@ margin-top: 10%;
   }
   .user_options-forms .forms_buttons-action {
     background-color: #e8716d;
-    border-radius: 3px;
+    border-radius: 8px;
     padding: 10px 35px;
     font-size: 1rem;
     font-family: "Montserrat", sans-serif;
@@ -402,6 +410,8 @@ margin-top: 10%;
     letter-spacing: 0.1rem;
     -webkit-transition: background-color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out;
+    outline: none;
+    border: none;
   }
   .user_options-forms .forms_buttons-action:hover {
     background-color: #e14641;
@@ -409,7 +419,7 @@ margin-top: 10%;
   .user_options-forms .user_forms-signup,
   .user_options-forms .user_forms-login {
     position: absolute;
-    top: 70px;
+    top: 30px;
     left: 40px;
     width: calc(100% - 80px);
     opacity: 0;
@@ -427,6 +437,8 @@ margin-top: 10%;
   .user_options-forms .user_forms-signup .forms_buttons {
     -webkit-box-pack: end;
             justify-content: flex-end;
+            outline: none;
+            border: none;
   }
   .user_options-forms .user_forms-login {
     -webkit-transform: translate3d(0, 0, 0);
@@ -457,3 +469,7 @@ margin-top: 10%;
             animation: bounceRight 1s forwards;
   }
  
+
+  main{
+    margin: 100px 0 ;
+  }
