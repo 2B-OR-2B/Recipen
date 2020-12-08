@@ -1,55 +1,49 @@
 .searchPageBody{
-    /* background-image: url(''); */
+   margin-top: 7%;
 }
 
 .searchForms{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     flex-wrap: wrap;
+    
+    
 }
 
-.firstIngredient, .secondIngredient, .thirdIngredient{
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-}
-.searchDrinkDiv .searchForDrinkbutton{
-width:70%;
-
+.additional-searchfood-div{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border-radius: 5rem;
+    box-shadow:  0px 8px 15px rgba(19, 18, 18, 0.2), 
+    -10px 8px 15px rgba(0, 0, 0, 0.568), 10px 8px 15px rgba(14, 13, 13, 0.63);
 }
 #searchDrinkDiv, #searchFoodDiv{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
-    border: 1px solid red;
-   
+    margin-bottom: 1%;
 }
 
-drink-form-img{
-
-}
-/* position relacitve or flex to put the button in the immage */
-.drink-form-img{
-    background-image: url('../img/testdrink3.jpg');
-    width: 250px;
-    height: 500px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
 .search-food-btn{
     margin-bottom: -90px;
-
+    color: rgba(119, 34, 73, 0.829);
+    padding: 20px;
+    border-radius: 2rem;
+    border:none;
+    background-color: white;
+    margin-bottom: -90px;
+    width: 50%;
+    font-weight: 1000;
 }
 
 .food-form-img{
     background-image: url('../img/foodImg.jpg');
     width: 250px;
-    height: 500px;
+    
+    border-radius: 2rem 0rem 0rem 5rem ;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -57,4 +51,84 @@ drink-form-img{
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.search-food-form{
+    width:600px;
+    padding:40px 0px;
+    background-color:white ;
+    border-radius: 0rem 5rem 2rem 0rem ;
+  
+}
+.form-def{
+    /* h3 of the form */
+    text-align: center;
+  
+}
+.firstIngredient, .secondIngredient , .thirdIngredient{
+    width: 85%;
+    padding: 15px;
+    border: none;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.534);
+    margin-top:10px ;
+}
+.firstIngredientfoodDiv, .secondIngredientfoodDiv, .thirdIngredientFoodDiv{
+    display: flex;
+    justify-content: center;
+}
+.search-for-food-btn, .searchForDrinkbutton{
+    
+    display: block;
+    margin: 40px auto -9px auto;
+    outline: none;
+    background-color: rgba(119, 34, 73, 0.829);
+    color: white;
+    padding: 20px;
+    border-radius: 2rem;
+    border: none;
+}
+.search-drink-btn{
+color: rgba(119, 34, 73, 0.829);
+padding: 20px;
+border-radius: 2rem;
+border:none;
+background-color: white;
+margin-bottom: -90px;
+width: 50%;
+font-weight: 1000;
+}
+
+.search-drink-form{
+    width:600px;
+    padding:40px 0px;
+    background-color:white ;
+    border-radius: 5rem 0rem 0rem 2rem ;
+  
+}
+/* position relacitve or flex to put the button in the immage */
+.drink-form-img{
+    background-image: url('../img/testdrink3.jpg');
+    width: 250px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 0rem 2rem 5rem 0rem ;
+
+
+}
+
+.firstIngredientDrinkDiv, .secondIngredientDrinkDiv, .thirdIngredientDrinkDiv{
+    display: flex;
+    justify-content: center;
+}
+.avoid-footer-up{
+    height: 10%;
+    margin-bottom: 30%;
+}
+main{
+    min-height: 80vh;
 }
