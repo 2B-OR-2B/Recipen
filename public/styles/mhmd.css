@@ -7,7 +7,6 @@
     justify-content: space-around;
     flex-wrap: wrap;
     
-    
 }
 
 .additional-searchfood-div{
@@ -24,7 +23,7 @@
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
-    margin-bottom: 1%;
+    /* margin-top: 2%; */
 }
 
 .search-food-btn{
@@ -98,6 +97,12 @@ width: 50%;
 font-weight: 1000;
 }
 
+.search-drink-btn:focus, .firstIngredient:focus, .secondIngredient:focus, .thirdIngredient:focus, .search-food-btn:focus{
+border: none;
+border-bottom:1px solid rgba(128, 128, 128, 0.534) ;
+outline: none;
+}
+
 .search-drink-form{
     width:600px;
     padding:40px 0px;
@@ -130,5 +135,5 @@ font-weight: 1000;
     margin-bottom: 30%;
 }
 main{
-    min-height: 80vh;
+    min-height: 73vh;
 }
