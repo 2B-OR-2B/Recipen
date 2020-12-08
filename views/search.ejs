@@ -3,36 +3,62 @@
 <body class="searchPageBody">
     <section class="searchForms">
         <div id="searchFoodDiv">
-            <form action="/searchFood?id=<%=id%>" method="POST">
-                <div class="firstIngredientfoodDiv">
-                    <input class="firstIngredient" type="text" name="firstIngredient" placeholder="Enter first ingredient" required>
-                </div>
-                <div class="secondIngredientfoodDiv">
-                    <input class='secondIngredient' type="text" name="secondIngredient" placeholder='Enter second ingredient'>
-                </div>
-                <div class="thirdIngredientFoodDiv">
-                    <input class="thirdIngredient" type="text" name="thirdIngredient" placeholder='Enter third ingredient'>
-                </div>
-                <button> Search for food</button>
-            </form>
+            <div class="food-form-img">
+                <p> search for food?</p>
+                <button class="search-drink-btn">
+                    search for Drink
+                </button>
+            </div>
+            <div class="search-food-form-div-222">
+                <form action="/searchFood?id=<%=id%>" method="POST">
+                    <div class="firstIngredientfoodDiv">
+                        <input class="firstIngredient" type="text" name="firstIngredient"
+                            placeholder="Enter first ingredient" required>
+                    </div>
+                    <div class="secondIngredientfoodDiv">
+                        <input class='secondIngredient' type="text" name="secondIngredient"
+                            placeholder='Enter second ingredient'>
+                    </div>
+                    <div class="thirdIngredientFoodDiv">
+                        <input class="thirdIngredient" type="text" name="thirdIngredient"
+                            placeholder='Enter third ingredient'>
+                    </div>
+                    <button> Search for food</button>
+                </form>
+            </div>
+            
         </div>
         <div id="searchDrinkDiv">
-            <form action="/searchDrink?id=<%=id%>" method="POST">
-                <div class="firstIngredientDrinkDiv">
-                    <input class="firstIngredient" type="text" name="firstIngredient" placeholder="Enter first ingredient" required>
-                </div>
-                <div class="secondIngredientDrinkDiv">
-                    <input class="secondIngredient" type="text" name="secondIngredient" placeholder='Enter second ingredient'>
-                </div>
-                <div class="thirdIngredientDrinkDiv">
-                    <input class="thirdIngredient" type="text" name="thirdIngredient" placeholder='Enter third ingredient'>
-                </div>
-                <button> Search for drink</button>
-            </form>
+            <div class="search-drink-form-div-222">
+                <form class="search-drink-form" action="/searchDrink?id=<%=id%>" method="POST">
+                    <div class="firstIngredientDrinkDiv">
+                        <input class="firstIngredient" type="text" name="firstIngredient"
+                            placeholder="Enter first ingredient" required>
+                    </div>
+                    <div class="secondIngredientDrinkDiv">
+                        <input class="secondIngredient" type="text" name="secondIngredient"
+                            placeholder='Enter second ingredient'>
+                    </div>
+                    <div class="thirdIngredientDrinkDiv">
+                        <input class="thirdIngredient" type="text" name="thirdIngredient"
+                            placeholder='Enter third ingredient'>
+                    </div>
+                    <button class="searchForDrinkbutton"> Search for drink</button>
+                </form>
+            </div>
+            <div class="drink-form-img">
+                <p> need food?</p>
+                <button class="search-food-btn">
+                    search for food
+                </button>
+            </div>
         </div>
     </section>
-    <%- include('./layout/footer.ejs') %>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="./js/app.js"></script>
+    <script src="./js/mhmd.js"></script>
+    
 </body>
 
 </html>

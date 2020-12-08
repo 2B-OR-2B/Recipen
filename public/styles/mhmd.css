@@ -12,7 +12,49 @@
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.5);
 }
-.searchDrinkDiv button{
+.searchDrinkDiv .searchForDrinkbutton{
 width:70%;
 
+}
+#searchDrinkDiv, #searchFoodDiv{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border: 1px solid red;
+   
+}
+
+drink-form-img{
+
+}
+/* position relacitve or flex to put the button in the immage */
+.drink-form-img{
+    background-image: url('../img/testdrink3.jpg');
+    width: 250px;
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.search-food-btn{
+    margin-bottom: -90px;
+
+}
+
+.food-form-img{
+    background-image: url('../img/foodImg.jpg');
+    width: 250px;
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
