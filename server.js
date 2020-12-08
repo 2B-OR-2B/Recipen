@@ -54,6 +54,7 @@ function deleteFavHandler (req,res){
     client.query(SQL,values).then(()=>{
         res.redirect(`/fav?id=${user_id}`)
     })
+    .catch(e=>{errorHandler('error within deleting from favorites = = ='+e,req,res)})
 
 
 }
@@ -71,8 +72,8 @@ function favPageHandler(req,res){
         let values=[id];
         client.query(SQL,values).then(response2=>{
             res.render('fav',{foods: response1.rows,drinks:response2.rows,id:id});
-        })
-    })
+        }).catch(e=>{errorHandler('error within joining the tables fav_drink and drinks = = ='+e,req,res)})
+    }).catch(e=>{errorHandler('error within joining the tables fav_food and foods = = ='+e,req,res)})
 
 }
 
@@ -99,7 +100,7 @@ function signInHandler(req, res) {
         }
         // front end check the type of response.. ( string (error) OR object )
 
-    })
+    }).catch(e=>{errorHandler('error while checking the email and password = = ='+e,req,res)})
 
 }
 
@@ -116,8 +117,7 @@ function signUpHandler(req, res) {
         // res.render('index', { user: data.rows[0] })
         res.redirect(`/?id=${data.rows[0].id}`)
 
-    })
-        .catch(e => { res.render('register',{isLoggedIn:true , isRegistered:false,id:''}) })
+    }).catch(e => { res.render('register',{isLoggedIn:true , isRegistered:false,id:''}) })
     // front end check the type of response.. ( string (error) OR object )
 
 
@@ -143,10 +143,10 @@ function homePageHandler(req, res) {
             superagent.get(cocktailUrl).then(cocktailResult => {
                 superagent.get(dessertUrl).then(dessertResult => {
                     res.render('index', { cocktail: cocktailResult.body, food: foodResult.body, dessert: dessertResult.body, user:data.rows[0]})
-                })
-            })
-        })
-    })
+                }).catch(e=>{errorHandler('error within getting data using dessertURL from the API = = ='+e,req,res)})
+            }).catch(e=>{errorHandler('error within getting data using cocktailURL from the API = = ='+e,req,res)})
+        }).catch(e=>{errorHandler('error within getting data using urlFood from the API = = ='+e,req,res)})
+    }).catch(e=>{errorHandler('error within getting user data  = = ='+e,req,res)})
 
 }
 
@@ -166,7 +166,7 @@ function saveFoodHandler(req, res) {
         }
         ).catch(error=>{res.status(600).json(" ------ Already exists in your favorites")})
         
-    })
+    }).catch(e=>{errorHandler('error within insert food to foods table  = = ='+e,req,res)})
    
 }
 function saveDrinkHandler(req, res) {
@@ -190,7 +190,7 @@ function saveDrinkHandler(req, res) {
         }
         ).catch(error=>{res.status(600).json(" ------ Already exists in your favorites")})
         
-    })
+    }).catch(e=>{errorHandler('error within insert drink to drinks table  = = ='+e,req,res)})
    
 
 }
@@ -281,11 +281,11 @@ function searchFoodHandler(req, res) {
                             suggestionsArray=suggestionsArray.length? suggestionsArray : '';
                             res.render('result',{data:dataArray,suggestions:suggestionsArray,id:id});
                         }
-                    })
+                    }).catch(e=>{errorHandler('error within getting data from API SEARCHFOODHANDLER inside map  = = ='+e,req,res)})
             })
 
 
-        })
+        }).catch(e=>{errorHandler('error within getting data from API SEARCHFOODHANDLER  = = ='+e,req,res)})
     // loop on the urls then search inside the ingredients of them
 
 
@@ -343,11 +343,11 @@ function searchDrinkHandler(req, res) {
                             res.render('result',{data:dataArray,suggestions:suggestionsArray,id:id});
                                 
                         }
-                    })
+                    }).catch(e=>{errorHandler('error within getting data from API SEARCHDRINKHANDLER inside the map  = = ='+e,req,res)})
             })
 
 
-        })
+        }).catch(e=>{errorHandler('error within getting data from API SEARCHDRINKHANDLER  = = ='+e,req,res)})
 }
 
 
@@ -397,12 +397,12 @@ function getDrinkIngredients(drinkObject) {
 
 
 // all routes & error 
-// app.use(errorHandler);
+app.use(errorHandler);
 app.get('*', anyRouteHandler)
 
 // connection 
 client.connect().then(() => {
     app.listen(PORT, () => { console.log(`Listening on ${PORT}`) })
 
-})
+}).catch(e=>{errorHandler('error with connecting the database = = ='+e,req,res)})
 

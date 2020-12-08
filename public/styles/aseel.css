@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400&display=swap');/*font-family: 'Roboto Slab', serif;*/
+
+body{
+  font-family:'Roboto Slab', serif;
+}
+/* result css  */
 .card {
     /* Add shadows to create the "card" effect */
   text-align: center;
@@ -5,13 +11,7 @@
     width: 50%;
     height: 50%;
     
-}
-
- /* On mouse-over, add a deeper shadow */
- .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
+}  
   /* Add some padding inside the card container */
   .container {
     padding: 2px 16px;
@@ -21,7 +21,7 @@
 
   }
   .resultContainer{ 
-        display: flex;
+    display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     flex-wrap: wrap;
@@ -48,7 +48,7 @@
       box-shadow: 10px 10px rgba(27, 24, 24, 0.5) ;
       background-color: burlywood;
       padding-bottom: 1%;
-      
+margin-top: 10%;      
   }
 .parent{
     display: flex;
@@ -57,7 +57,7 @@
 }
 
 
-  .btn{  
+  .btn,.saveFood{  
     text-align: center;
   cursor: pointer;
   font-size:10px;
@@ -70,15 +70,75 @@
     transition-duration: 0.4s;
     overflow: hidden;
 }
-.btn:hover{
+.btn:hover,.saveFood:hover{
     color:#DDDDDD;
     border-color:#DDDDDD;
     }
-    .btn:active{
+    .btn:active,.saveFood:active{
     color:#BBBBBB;
  border-color:#BBBBBB;
     }
   
+    /* end of css result page  */
+
+/* details page css */
+@media screen and (min-width: 400px){
+
+  .detailsMain{
+   width: 100%;
+    height: 1000px;
+    /* display: flex; */
+    margin:5% 0 0 0;
+    /* flex-direction: column;
+    flex-wrap: wrap; */
+    background-color: #ffffff;
+    justify-content: space-between;
+  }
+  .idImage{
+    width: 80%;
+  }
+  
+  #details{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-image: url("./../img/download2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    overflow-y: visible;
+    outline-width: 5px;
+    height: 800px;
+    padding-top:17%;
+    padding-right: 11%;
+    
+  }
+
+#picture img{
+  width:400px ;
+  height: 500px;
+  border-radius: 1rem;
+}
+
+#picture{
+width: 20%;
+height: 50%;
+padding-top: 5%;
+}
+.ing{
+  width: 20%;
+  height: 50%;
+ color: white;
+ line-height: 1.7em;
+ font-size: 18px;
+}
+#steps{
+  width:40%;
+  height: 80%;
+line-height: 1.6em;
+color: black;
+}
 
 
 
@@ -86,10 +146,18 @@
 
 
 
+
+}
+
+
+
+
+/* end of details css */
 
 
 
 /* 
+
     sign in and up css */
 
     .user input {
@@ -101,34 +169,7 @@
      .user input[type="submit"] {
         cursor: pointer;
       }
-     .user input::-webkit-input-placeholder {
-        font-size: 0.85rem;
-        font-family: "Montserrat", sans-serif;
-        font-weight: 300;
-        letter-spacing: 0.1rem;
-        color: #ccc;
-      }
-     .user input::-moz-placeholder {
-        font-size: 0.85rem;
-        font-family: "Montserrat", sans-serif;
-        font-weight: 300;
-        letter-spacing: 0.1rem;
-        color: #ccc;
-      }
-      .user input:-ms-input-placeholder {
-        font-size: 0.85rem;
-        font-family: "Montserrat", sans-serif;
-        font-weight: 300;
-        letter-spacing: 0.1rem;
-        color: #ccc;
-      }
-     .user input::-ms-input-placeholder {
-        font-size: 0.85rem;
-        font-family: "Montserrat", sans-serif;
-        font-weight: 300;
-        letter-spacing: 0.1rem;
-        color: #ccc;
-      }
+     
       .user input::placeholder {
         font-size: 0.85rem;
         font-family: "Montserrat", sans-serif;
@@ -268,8 +309,9 @@
   
   .user_unregistered-text,
   .user_registered-text {
-    font-size: 0.83rem;
+    font-size: 1rem;
     line-height: 1.4em;
+    text-align: center;
   }
   
   .user_registered-login,
@@ -278,7 +320,7 @@
     border: 1px solid #ccc;
     border-radius: 3px;
     padding: 10px 30px;
-    color: #fff;
+    color: black;
     text-transform: uppercase;
     line-height: 1em;
     letter-spacing: 0.2rem;
@@ -294,18 +336,18 @@
   /**
    * Signin and signup forms
    */
-.user_unregistered-signup, 
+/* .user_unregistered-signup, 
 .user_registered-login{
 
 
-}
+} */
    
   .user_options-forms {
     position: absolute;
     top: 50%;
     left: 30px;
     width: calc(50% - 30px);
-    min-height: 460px;
+    min-height:450px;
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
@@ -334,19 +376,26 @@
     margin-bottom: 20px;
   }
   .user_options-forms .forms_field-input {
-    width: 100%;
-    border-bottom: 1px solid #ccc;
-    padding: 6px 20px 6px 6px;
+    width: 90%;
+    border: none;
+    border-bottom:2px solid #66585881;
+    padding: 8px 15px;
     font-family: "Montserrat", sans-serif;
-    font-size: 1rem;
+    font-size: 1.2em;
     font-weight: 300;
-    color: gray;
+    color: rgb(29, 27, 27);
     letter-spacing: 0.1rem;
     -webkit-transition: border-color 0.2s ease-in-out;
     transition: border-color 0.2s ease-in-out;
   }
   .user_options-forms .forms_field-input:focus {
-    border-color: gray;
+    /* border-color: gray; */
+    background-color:#e47874;
+    color:whitesmoke;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    
   }
   .user_options-forms .forms_buttons {
     display: -webkit-box;
@@ -370,7 +419,7 @@
   }
   .user_options-forms .forms_buttons-action {
     background-color: #e8716d;
-    border-radius: 3px;
+    border-radius: 8px;
     padding: 10px 35px;
     font-size: 1rem;
     font-family: "Montserrat", sans-serif;
@@ -380,6 +429,8 @@
     letter-spacing: 0.1rem;
     -webkit-transition: background-color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out;
+    outline: none;
+    border: none;
   }
   .user_options-forms .forms_buttons-action:hover {
     background-color: #e14641;
@@ -387,7 +438,7 @@
   .user_options-forms .user_forms-signup,
   .user_options-forms .user_forms-login {
     position: absolute;
-    top: 70px;
+    top: 30px;
     left: 40px;
     width: calc(100% - 80px);
     opacity: 0;
@@ -405,6 +456,8 @@
   .user_options-forms .user_forms-signup .forms_buttons {
     -webkit-box-pack: end;
             justify-content: flex-end;
+            outline: none;
+            border: none;
   }
   .user_options-forms .user_forms-login {
     -webkit-transform: translate3d(0, 0, 0);
@@ -435,3 +488,7 @@
             animation: bounceRight 1s forwards;
   }
  
+
+  main{
+    margin: 100px 0 ;
+  }
