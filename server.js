@@ -30,7 +30,7 @@ app.post('/searchDrink', searchDrinkHandler);
 app.post('/details', detailsHandler);
 app.post('/saveFood', saveFoodHandler);
 app.post('/saveDrink', saveDrinkHandler);
-app.get('/register',(req,res)=>{res.render('register',{id:req.query.id})})
+app.get('/register',registerHandler)
 app.get('/fav',favPageHandler);
 app.delete('/deleteFav',deleteFavHandler)
 //temporary rout
@@ -55,6 +55,10 @@ function deleteFavHandler (req,res){
     })
 
 
+}
+
+function registerHandler (req,res){
+    res.render('register',{isLoggedIn:true,isRegistered:true,id:''})
 }
 
 function favPageHandler(req,res){
@@ -90,7 +94,7 @@ function signInHandler(req, res) {
 
         }
         else {
-            res.json('email or password is wrong')
+            res.render('register',{isLoggedIn:false , isRegistered:true,id:''})
         }
         // front end check the type of response.. ( string (error) OR object )
 
@@ -112,7 +116,7 @@ function signUpHandler(req, res) {
         res.redirect(`/?id=${data.rows[0].id}`)
 
     })
-        .catch(e => { errorHandler(`Email is already exists..${e}`, req, res) })
+        .catch(e => { res.render('register',{isLoggedIn:true , isRegistered:false,id:''}) })
     // front end check the type of response.. ( string (error) OR object )
 
 

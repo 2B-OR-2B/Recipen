@@ -72,10 +72,13 @@
 
             </div>
         </div>
-
+        
+        <input type="hidden" id="isLoggedIn" name="isLoggedIn" value="<%=isLoggedIn%>">
+        <input type="hidden" id="isRegistered" name="isRegistered" value="<%=isRegistered%>">
     </section>
     <%- include('./layout/footer.ejs') %>
     <script src="./js/sign.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

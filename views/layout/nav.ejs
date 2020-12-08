@@ -1,8 +1,4 @@
-    <%
-        let search = id? `/searchPage?id=${id}` : "/";
-        let fav = id? `/fav?id=${id}`: "/";
-        let home = id? `/?id=${id}` : "/" ;
-    %>
+    
     <div class="nav">
         <div class="inner_cont_nav">
             <div class="logo">
@@ -10,9 +6,9 @@
                     style="height: 50px; width: 50px;" >
             </div>
             <ul id="clickable">
-                <li><a href="<%=home%>"><i class="fas fa-house-user">HOME</i></a></li>
-                <li><a href="<%=search%>"><i class="fas fa-search"></i>SEARCH</a></li>
-                <li><a href="<%=fav%>"><i class="star far fa-star"></i>FAVORITES</a></li>
+                <li><i id="homeLink"  class="fas fa-house-user">HOME</i></li>
+                <li><i id="searchLink" class="fas fa-search">SEARCH</i></li>
+                <li><i id="favLink" class="star far fa-star">FAVORITES</i></li>
               
                 
             </ul>
