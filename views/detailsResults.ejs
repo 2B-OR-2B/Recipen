@@ -3,7 +3,7 @@
 <body>
 <%- include('./layout/nav.ejs')%>
     <main>
-        <section>
+        <section id="details">
             <img src="<%=obj.img_url%>" > 
             
              <h2><%=obj.name%></h2>
@@ -15,7 +15,7 @@
                     <%})%>
                 </ul>
             </div>
-            <div>
+            <div id="steps">
                 <h3>Steps:</h3>
                 <ol>
                     <%obj.steps.split('. ').forEach(item=>{%>
