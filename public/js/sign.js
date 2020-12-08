@@ -20,3 +20,16 @@ loginButton.addEventListener('click', () => {
   userForms.classList.remove('bounceLeft')
   userForms.classList.add('bounceRight')
 }, false)
+
+let isLoggedIn = document.getElementById('isLoggedIn').value;
+let isRegistered = document.getElementById('isRegistered').value;
+
+
+if( isLoggedIn === 'false'){
+  
+  alert('Email OR Password is wrong!');
+}
+if(isRegistered==='false'){
+  alert('You already have registered with this email..');
+}
+console.log(isLoggedIn,'------',isRegistered);

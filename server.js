@@ -6,7 +6,7 @@ require('dotenv').config();
 const pg = require('pg');
 const superagent = require('superagent');
 const methodOverride = require('method-override');
-const { search } = require('superagent');
+
 
 //app setup:
 const PORT = process.env.PORT || 3000;
@@ -30,28 +30,53 @@ app.post('/searchDrink', searchDrinkHandler);
 app.post('/details', detailsHandler);
 app.post('/saveFood', saveFoodHandler);
 app.post('/saveDrink', saveDrinkHandler);
+app.get('/register',registerHandler)
+app.get('/fav',favPageHandler);
+app.delete('/deleteFav',deleteFavHandler);
+app.get('/about',(req,res)=>{res.render('about')});
 //temporary rout
-app.get('/testResult', (req, res) => {
-    res.render('result', {
-        data: '', suggestions: [
-            {
-                id: '111',
-                name: 'Mandi',
-                ingredients: 'aaaaaaaa,aaaaaa,aaaaaa,aaaaaa',
-                steps: `Mix the cornflour and 1 tbsp soy sauce, toss in the prawns and set aside for 10 mins. Stir the vinegar, remaining soy sauce, tomato purée, sugar and 2 tbsp water together to make a sauce.\r\n\r\nWhen you’re ready to cook, heat a large frying pan or wok until very hot, then add 1 tbsp oil. Fry the prawns until they are golden in places and have opened out– then tip them out of the pan.\r\n\r\nHeat the remaining oil and add the peanuts, chillies and water chestnuts. Stir-fry for 2 mins or until the peanuts start to colour, then add the ginger and garlic and fry for 1 more min. Tip in the prawns and sauce and simmer for 2 mins until thickened slightly. Serve with rice`,
-                img_url: 'https://via.placeholder.com/300',
-                vid_url: '',
-                area: 'Arab',
-                category: 'meal',
-                type: 'food'
 
-            }]
-    })
-})
-app.get('/sign',(req,res)=>{res.render('register')})
 
 
 // handler functions
+function deleteFavHandler (req,res){
+    let user_id = req.query.id;
+    let {type,id}=req.body;
+    let SQL='';
+    
+    if(type==='food'){
+     SQL= 'DELETE FROM fav_foods WHERE user_id = $1 AND food_id=$2';
+    }
+    else{
+        SQL= 'DELETE FROM fav_drinks WHERE user_id = $1 AND drink_id=$2';
+    }
+    let values=[user_id,id];
+    client.query(SQL,values).then(()=>{
+        res.redirect(`/fav?id=${user_id}`)
+    })
+
+
+}
+
+function registerHandler (req,res){
+    res.render('register',{isLoggedIn:true,isRegistered:true,id:''})
+}
+
+function favPageHandler(req,res){
+    let id = req.query.id;
+    let SQL = 'SELECT  a.*, b.* FROM foods AS a JOIN fav_foods AS b ON a.id = b.food_id WHERE b.user_id =$1;';
+    let values=[id];
+    client.query(SQL,values).then(response1=>{
+        let SQL = 'SELECT  a.*, b.* FROM drinks AS a JOIN fav_drinks AS b ON a.id = b.drink_id WHERE b.user_id =$1;';
+        let values=[id];
+        client.query(SQL,values).then(response2=>{
+            res.render('fav',{foods: response1.rows,drinks:response2.rows,id:id});
+        })
+    })
+
+}
+
+
 
 function signInHandler(req, res) {
     /* 1 get:  email, pass
@@ -70,7 +95,7 @@ function signInHandler(req, res) {
 
         }
         else {
-            res.json('email or password is wrong')
+            res.render('register',{isLoggedIn:false , isRegistered:true,id:''})
         }
         // front end check the type of response.. ( string (error) OR object )
 
@@ -92,7 +117,7 @@ function signUpHandler(req, res) {
         res.redirect(`/?id=${data.rows[0].id}`)
 
     })
-        .catch(e => { errorHandler(`Email is already exists..${e}`, req, res) })
+        .catch(e => { res.render('register',{isLoggedIn:true , isRegistered:false,id:''}) })
     // front end check the type of response.. ( string (error) OR object )
 
 
@@ -100,8 +125,8 @@ function signUpHandler(req, res) {
 }
 
 function detailsHandler(req, res) {
-
-    res.render('detailsResults', { obj: req.body })
+    let id = req.query.id;
+    res.render('detailsResults', { obj: req.body ,id:id})
 }
 
 function homePageHandler(req, res) {
