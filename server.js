@@ -32,7 +32,8 @@ app.post('/saveFood', saveFoodHandler);
 app.post('/saveDrink', saveDrinkHandler);
 app.get('/register',registerHandler)
 app.get('/fav',favPageHandler);
-app.delete('/deleteFav',deleteFavHandler)
+app.delete('/deleteFav',deleteFavHandler);
+app.get('/about',(req,res)=>{res.render('about')});
 //temporary rout
 
 
