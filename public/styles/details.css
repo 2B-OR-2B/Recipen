@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
 body{
     
     background: rgba(197, 189, 189, 0.699);
+    min-height: 100vh;
 
 }
 iframe{
@@ -31,4 +34,15 @@ iframe{
 ::-webkit-scrollbar-thumb:hover {
   background: #52334a;
   cursor: pointer; 
+}
+.titleH2{
+  font-family: 'Courgette', cursive;
+  color: #6c4060;
+  text-shadow: 1px 2px 10px rgba(177, 167, 167, 0.856);
+  width: 20%;
+  margin:auto;
+  margin-bottom: 30px;
+  border-bottom: 4px solid  #6c4060  ;
+  padding-bottom: 3px;
+
 }

@@ -388,7 +388,7 @@ padding-top: 20px;
   }
   .user_options-container {
     position: relative;
-    width: 80%;
+    width: 65%;
     /* height: 43%; */
   }
   .user_options-text {
@@ -398,7 +398,7 @@ padding-top: 20px;
             justify-content: space-between;
     width: 100%;
     background-color: rgba(34, 34, 34, 0.85);
-    border-radius: 3px;
+    border-radius: 15px;
   }
   
   /**
@@ -438,11 +438,14 @@ padding-top: 20px;
     letter-spacing: 0.2rem;
     -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    cursor: pointer;
   }
   .user_registered-login:hover,
   .user_unregistered-signup:hover {
     color: rgba(34, 34, 34, 0.85);
     background-color: #ccc;
+    outline: none;
+    border: none;
   }
   
   /**
@@ -461,7 +464,7 @@ padding-top: 20px;
     width: calc(50% - 30px);
     min-height:450px;
     background-color: #fff;
-    border-radius: 3px;
+    border-radius: 15px;
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     -webkit-transform: translate3d(100%, -50%, 0);
@@ -481,7 +484,7 @@ padding-top: 20px;
     font-weight: 500;
     line-height: 1em;
     text-transform: uppercase;
-    color: #e8716d;
+    color:#704564;
     letter-spacing: 0.1rem;
   }
   .user_options-forms .forms_field:not(:last-of-type) {
@@ -493,7 +496,7 @@ padding-top: 20px;
     border-bottom:2px solid #66585881;
     padding: 8px 15px;
     font-family: "Montserrat", sans-serif;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 300;
     color: rgb(29, 27, 27);
     letter-spacing: 0.1rem;
@@ -502,8 +505,8 @@ padding-top: 20px;
   }
   .user_options-forms .forms_field-input:focus {
     /* border-color: gray; */
-    background-color:#e47874;
-    color:whitesmoke;
+    background-color:#704564d8;
+    color:white;
     outline: none;
     border: 1px solid white;
     border-radius: 10px;
@@ -530,7 +533,7 @@ padding-top: 20px;
     color: #b3b3b3;
   }
   .user_options-forms .forms_buttons-action {
-    background-color: #e8716d;
+    background-color: #704564ea;
     border-radius: 8px;
     padding: 10px 35px;
     font-size: 1rem;
@@ -543,9 +546,14 @@ padding-top: 20px;
     transition: background-color 0.2s ease-in-out;
     outline: none;
     border: none;
+    cursor: pointer;
+  }
+  
+  .singInButton{
+    margin-top: 40px;
   }
   .user_options-forms .forms_buttons-action:hover {
-    background-color: #e14641;
+    background-color: #5e3251;
   }
   .user_options-forms .user_forms-signup,
   .user_options-forms .user_forms-login {
@@ -602,8 +610,11 @@ padding-top: 20px;
  
 
   main{
-    margin: 100px 0 ;
+    margin: 100px 0;
   }
   main.result{
-    margin: 200px 0;
+    margin: 100px 0;
+  }
+  main.registerMain{
+    margin-top: 50px;
   }
