@@ -63,7 +63,7 @@
     }
     
     .nav ul {
-        width: 40%;
+        width: 60%;
         display: flex;
         list-style: none;
         flex-direction: row;
@@ -76,11 +76,16 @@
     .nav ul li {
         text-decoration: none;
         font-family: 'Roboto Slab', serif;
-        font-size: 21px;
+        font-size: 1.2em;
     }
+    .nav ul i{
+        cursor: pointer;
+    }
+
     .lastItem{
         margin-right:  40px;
     }
+    .lastItem span , .lastItem i { cursor: pointer;}
     .lastItem span,a{
         text-decoration: none;
         color:white;
@@ -88,16 +93,18 @@
         font-family: 'Roboto Slab', serif;
     }
     .greeting{
-        width: 40%;
+        width: 80%;
         height: 40%;
        display: flex;
        flex-direction: column;
+       align-items: flex-start;
     }
     .greeting span p {
         position: relative;
         font-family: 'Rubik', sans-serif;
         font-weight: 700;
-        font-size: 16px;
+        font-size: 1.4em;
+        margin-left: 35px;
         background: linear-gradient(90deg, rgba(182, 92, 159, 0.822), #fff, #000);
         background-repeat: no-repeat;
         background-size: 80%;
@@ -137,6 +144,7 @@
      flex-wrap: wrap;
      background-color: white;
      padding-top:0.5%;
+     box-shadow: 1px 2px 20px 8px rgba(54, 51, 53, 0.705) ;
      }
      .rand-recipe h2{
          width: 80%;
@@ -188,6 +196,7 @@
          justify-content: center;
          flex-wrap: wrap;
          padding-bottom: 2%;
+         box-shadow: 1px 2px 20px 8px rgba(54, 51, 53, 0.705) ;
          /* background-color:#ffeeee ; */
      }
      #abo{
@@ -202,6 +211,7 @@
      .introduction{
       width: 40%;
       margin-left: 2.5%;
+      
      }
      .introduction img{
          width: 100%;
@@ -212,22 +222,27 @@
          line-height: 2em;
      }
      .introduction button{
-         padding: 2%;
-         border-radius: 1rem;
+         padding: 8px 15px;
+         border-radius: 10px;
          font-weight: bolder;
-         font-size: 13px;
          background-color:rgba(85, 33, 72, 0.822);
          margin-left: 70%;
+         outline: none;
+         border:none;
+     }
+     .introduction button a{
+        font-size: 1.3em;
      }
      .introduction button:hover{
         box-shadow: 0 6px 18px rgba(177, 104, 158, 0.822) ;
      }
     #transparent{
-        width: 100%;
+        width: 75%;
         height: 30%;
         padding: 7% 0;
         font-size: 50px;
         color:white;
+        margin:auto;
     }
     #transparent p,h2{
         text-align: center;
@@ -272,3 +287,28 @@
         color:#999;padding:5px 15px;border-radius:10px;}
 
 }
+
+/* scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #4d2543da;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #52334a;
+    cursor: pointer; 
+  }
