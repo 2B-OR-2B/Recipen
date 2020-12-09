@@ -20,7 +20,7 @@ idArray.forEach(element => {
                 type: form.type.value,
                 route: form.route.value
             }
-            let url = `http://localhost:3000${obj.route}`;
+            let url = `https://to-be-or-not-to-be-recipen.herokuapp.com${obj.route}`;
             console.log(url);
             if (obj.type === 'food') {
                 obj['area'] = form.area.value;
