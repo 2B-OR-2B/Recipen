@@ -6,8 +6,12 @@
     max-width:100%;
   }
   
+  #body{
+    /* background-color: white; */
+    background-image: url('https://site.groupe-psa.com/content/uploads/sites/9/2016/12/white-background-2.jpg');
+  }
   html {
-    font-size: 62.5%;
+    /* font-size: 62.5%; */
   }
   
   .cards {
@@ -15,30 +19,54 @@
       flex-direction: row;
       justify-content: space-evenly;
       flex-wrap: wrap;
+      
     }
     
      .about-cards {
       text-align: center;
-      font-size: 1.5rem;
-      background-color:#ead8e2da;
-      border-radius: 5px;
+      font-size: 1.2em;
+      background-color:rgba(255, 255, 255, 0.377);
+      border-radius: 1rem;
       min-height: 300px;
-      height: 60rem;
-      width: 60rem;
+      height: 25rem;
+      width: 18rem;
       padding-top: 30px;
       margin-bottom: 5rem ;
-      
+      box-shadow: 0 6px 18px rgb(0, 0, 0);
+  
+  
     } 
     
     .about-img {
-     margin-top: 10%;
+      margin-top: 10%;
       border-radius: 50%;
-      height: 30rem;
-      width: 35rem;
+      height: 12rem;
+      width: 12rem;
+      margin-bottom: 10px;
+     
     }
 
     .mainAbout h2{
-font-size: 50px;
-color: white;
-margin-bottom: 5rem;
+      width: 42%;
+      margin: auto;
+      font-size: 3em;
+      color:#555;
+      margin-bottom: 3rem;
+      margin-top: 7rem;
+      border-bottom: 4px solid  rgba(85, 33, 72, 0.822) ;
+      font-family: 'Courgette', cursive;
+    }
+   .mainAbout h3{
+      color: rgb(247, 244, 244);
+      border-bottom: solid 4px rgba(85, 33, 72, 0.822);
+      background-color: rgba(85, 33, 72, 0.822);
+      padding: 7px;
+      font-size: .9em;
+      
+      
+    }
+    .mainAbout p {
+      font-size: .9em;
+      font-weight: bold;
+      font-family: 'Roboto Slab', serif;
     }

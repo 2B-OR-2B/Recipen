@@ -12,7 +12,7 @@
 <%let id ='' ; %>
 <body>
     <%- include('./layout/nav.ejs')%>
-    <main>
+    <main class="registerMain">
         <section class="user">
             <div class="user_options-container">
                 <div class="user_options-text">
@@ -33,12 +33,13 @@
                 <div class="user_options-forms" id="user_options-forms">
                     <div class="user_forms-login">
                         <h2 class="forms_title">Sign in</h2>
-                        <form action="/signIn" method="POST" class="forms_form">
+                        <form action="/signIn" method="POST" class="forms_form form_signIn">
                             <!-- <fieldset class="forms_fieldset"> -->
                                 <div class="forms_field">
                                     <input type="email" name="email" placeholder="Email" class="forms_field-input" required
                                         autofocus>
                                 </div>
+                                <div style="margin: 40px 0;"></div>
                                 <div class="forms_field">
     
                                     <input type="password" name="pass" placeholder="Password" class="forms_field-input"
@@ -47,7 +48,7 @@
                             <!-- </fieldset> -->
                             <div class="forms_buttons">
     
-                                <button type="submit" class="forms_buttons-action">Sign In</button>
+                                <button type="submit" class="forms_buttons-action singInButton">Sign In</button>
                             </div>
                         </form>
                     </div>
