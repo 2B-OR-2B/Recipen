@@ -1,12 +1,21 @@
-<%- include('./layout/head.ejs')%>
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <title>Recipen</title>
+</head>
 
 <body>
 
     <%- include('./layout/nav.ejs')%>
 
 
-    <main>
-        <div class="parent" >
+    <main class="result">
+
             <section class="resultContainer">
                 <% 
 
@@ -22,12 +31,12 @@
             let myData = foods.concat(drinks);
             
            
-            if (myData.length){
-                    
-                    myData.forEach(item=>{  %>
+            if (myData.length){ %>
+
+                <div class="itemsGrid">
+                 <%   myData.forEach(item=>{  %>
 
                 <section class="item">
-                    <div class="card">
                         <form action="/details?id=<%=id%>" method="POST">
                             <img src=<%= item.img_url %>>
                             <div class="container">
@@ -67,20 +76,22 @@
                     </section>
 
                 <%       
-                 })
-            }
+                 }) %>
+                </div>
+           <% }
             else{ %>
-
-                <h2>You Don't have any Food or Drink in your favorite list. <br>
-                    Feel free to go to the search form and <a href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
-                </h2>
+                <div class="notify">
+                    <h2>You Don't have any Food or Drink in your favorite list. <br>
+                        Feel free to go to the search form and <br> <a href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
+                    </h2>
+                </div>
                 <% }%>
 
 
             </section>
-        </div>
-    </main>
 
+    </main>
+    <%- include('./layout/footer.ejs') %>
     <script src="./js/app.js"></script>
 </body>
 

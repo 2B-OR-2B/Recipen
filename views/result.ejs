@@ -1,11 +1,19 @@
-<%- include('./layout/head.ejs')%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <title>Recipen</title>
+</head>
 
 <body>
 
     <%- include('./layout/nav.ejs')%>
 
-    <main>
-        <div class="parent">
+    <main class="result">
             <section class="resultContainer">
                 <% 
 
@@ -17,17 +25,18 @@
                     if( ! data.length){ %>
                 <div class="notify">
                     <h2>There is no matched result for your request.<br>here is some suggested result based on your main
-                        ingredient
-                        (The first one). </h2>
+                        ingredient. </h2>
                 </div>
-
-                <% }
-                    myData.forEach(item=>{ 
+                
+                
+                <% } %>
+                <div class="itemsGrid">
+                <%    myData.forEach(item=>{ 
                         idsArray.push(item.id);
                     %>
 
                 <section class="item">
-                    <div class="card">
+                   
                         <form action="/details?id=<%=id%>" method="POST">
                             <img src=<%= item.img_url %>>
                             <div class="container">
@@ -74,17 +83,14 @@
                             <% }   %>
                             <button id='saveFood' class="btn saveFood">ADD TO FAVORITES</button>
                         </form>
-                    </div>
-
-
                 </section>
 
-                <%       
-                 })
-             }
+                <% })%>
+            </div>
+            <% }
              else{ %>
                 <div class="notify">
-                    <h2>There is no matched results.. try again with different ingredients. <a
+                    <h2>There is no matched results.. try again with different ingredients.<br> <a
                             href="/searchPage?id=<%=id%>">SEARCH AGAIN</a>
                     </h2>
                  </div>
@@ -94,7 +100,6 @@
 
                 <input id="meals" type="hidden" name="ids" value="<%=idsSt %>">
             </section>
-        </div>
     </main>
     <%- include('./layout/footer.ejs') %>
     <script src="./js/app.js"></script>

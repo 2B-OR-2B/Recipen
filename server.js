@@ -285,7 +285,7 @@ function searchFoodHandler(req, res) {
             })
 
 
-        }).catch(e=>{errorHandler('error within getting data from API SEARCHFOODHANDLER  = = ='+e,req,res)})
+        }).catch(e=>{ res.render('result',{data:'',suggestions:'',id:id});})
     // loop on the urls then search inside the ingredients of them
 
 
@@ -347,7 +347,7 @@ function searchDrinkHandler(req, res) {
             })
 
 
-        }).catch(e=>{errorHandler('error within getting data from API SEARCHDRINKHANDLER  = = ='+e,req,res)})
+        }).catch(e=>{res.render('result',{data:'',suggestions:'',id:id});})
 }
 
 
@@ -397,7 +397,7 @@ function getDrinkIngredients(drinkObject) {
 
 
 // all routes & error 
-app.use(errorHandler);
+// app.use(errorHandler);
 app.get('*', anyRouteHandler)
 
 // connection 
