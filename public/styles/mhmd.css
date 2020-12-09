@@ -27,15 +27,16 @@
 }
 
 .search-food-btn{
-    margin-bottom: -90px;
+   
     color: rgba(119, 34, 73, 0.829);
     padding: 20px;
     border-radius: 2rem;
     border:none;
     background-color: white;
-    margin-bottom: -90px;
+    margin-bottom: -110px;
     width: 50%;
     font-weight: 1000;
+    cursor: pointer;
 }
 
 .food-form-img{
@@ -85,6 +86,7 @@
     padding: 20px;
     border-radius: 2rem;
     border: none;
+    cursor: pointer;
 }
 .search-drink-btn{
 color: rgba(119, 34, 73, 0.829);
@@ -95,12 +97,22 @@ background-color: white;
 margin-bottom: -90px;
 width: 50%;
 font-weight: 1000;
+cursor: pointer;
 }
 
 .search-drink-btn:focus, .firstIngredient:focus, .secondIngredient:focus, .thirdIngredient:focus, .search-food-btn:focus{
 border: none;
 border-bottom:1px solid rgba(128, 128, 128, 0.534) ;
 outline: none;
+
+}
+.search-drink-btn:hover , .search-food-btn:hover{ 
+    
+    transform: translateY(2px);
+}
+.search-for-food-btn:hover, .searchForDrinkbutton:hover{
+    background-color: #5e3251;
+    transform: translateY(2px);
 }
 
 .search-drink-form{

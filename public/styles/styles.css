@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');/*font-family: 'Montserrat', sans-serif;*/
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');/*font-family: 'Rubik', sans-serif;*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400&display=swap');/*font-family: 'Roboto Slab', serif;*/
-
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 @media screen and (min-width: 400px) {
     body,div,h1,h2,span,p,a,i,section{
         font-family: 'Roboto Slab', serif;
@@ -108,7 +108,8 @@
         background: linear-gradient(90deg, rgba(182, 92, 159, 0.822), #fff, #000);
         background-repeat: no-repeat;
         background-size: 80%;
-        animation: animate 15s infinite;
+        animation: animate 12s infinite;
+        
         -webkit-background-clip: text;
         -webkit-text-fill-color: rgba(255, 255, 255, 0);
       }
@@ -117,8 +118,9 @@
         0% {
           background-position: -350%;
         }
+       
         100% {
-          background-position: 350%;
+          background-position: 700%;
         }
       }
       .greeting span h1 {
@@ -311,4 +313,8 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #52334a;
     cursor: pointer; 
+  }
+
+  .titleH2{
+    font-family: 'Courgette', cursive;
   }

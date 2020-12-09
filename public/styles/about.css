@@ -54,6 +54,7 @@
       margin-bottom: 3rem;
       margin-top: 7rem;
       border-bottom: 4px solid  rgba(85, 33, 72, 0.822) ;
+      font-family: 'Courgette', cursive;
     }
    .mainAbout h3{
       color: rgb(247, 244, 244);
@@ -61,6 +62,7 @@
       background-color: rgba(85, 33, 72, 0.822);
       padding: 7px;
       font-size: .9em;
+      
       
     }
     .mainAbout p {
