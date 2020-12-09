@@ -1,24 +1,86 @@
-<%- include('./layout/head.ejs')%>
-    
-<body>
-    
-    <form action="/searchFood?id=<%=id%>" method="POST">
-        <input type="text" name="firstIngredient" placeholder="first" >
-        <input type="text" name="secondIngredient" placeholder='second' >
-        <input type="text" name="thirdIngredient" placeholder='third'>
-        <button> submit food</button>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/mhmd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <title>Search</title>
+</head>
 
+<body class="searchPageBody">
+    <%- include('./layout/nav.ejs')%>
+    <main>
+    <section class="searchForms">
+        <!-- <div class="avoid-footer-up"><p>h</p></div> -->
+        <div id="searchFoodDiv" class="front flip">
+            <!-- because the form & image removed from the div id  -->
+            <!-- <div class="additional-searchfood-div"> -->
+                <div class="food-form-img">
+                    <p> search for food?</p>
+                    <button class="search-drink-btn">
+                        need Drink
+                    </button>
+                </div>
+                <div class="search-food-form-div-222">
+                    <form class='search-food-form' action="/searchFood?id=<%=id%>" method="POST">
+                        <h3 class="form-def">Search for food by ingredients</h3>
+                        <div class="firstIngredientfoodDiv">
+                            <input class="firstIngredient" type="text" name="firstIngredient"
+                                placeholder="Enter first ingredient" required>
+                        </div>
+                        <div class="secondIngredientfoodDiv">
+                            <input class='secondIngredient' type="text" name="secondIngredient"
+                                placeholder='Enter second ingredient'>
+                        </div>
+                        <div class="thirdIngredientFoodDiv">
+                            <input class="thirdIngredient" type="text" name="thirdIngredient"
+                                placeholder='Enter third ingredient'>
+                        </div>
+                        <button class="search-for-food-btn"> Search for food</button>
+                    </form>
+                </div>
 
-    <form action="/searchDrink?id=<%=id%>" method="POST">
-        <input type="text" name="firstIngredient" placeholder="first" >
-        <input type="text" name="secondIngredient" placeholder='second' >
-        <input type="text" name="thirdIngredient" placeholder='third'>
-        <button> sumbmit drink</button>
-    </form>
-
+            <!-- </div> -->
+        </div>
+        <div id="searchDrinkDiv" class="back unflip">
+            <div class="search-drink-form-div-222">
+                <form class="search-drink-form" action="/searchDrink?id=<%=id%>" method="POST">
+                    <h3 class="form-def">Search for Drinks by ingredients</h3>
+                    <div class="firstIngredientDrinkDiv">
+                        <input class="firstIngredient" type="text" name="firstIngredient"
+                            placeholder="Enter first ingredient" required>
+                    </div>
+                    <div class="secondIngredientDrinkDiv">
+                        <input class="secondIngredient" type="text" name="secondIngredient"
+                            placeholder='Enter second ingredient'>
+                    </div>
+                    <div class="thirdIngredientDrinkDiv">
+                        <input class="thirdIngredient" type="text" name="thirdIngredient"
+                            placeholder='Enter third ingredient'>
+                    </div>
+                    <button class="searchForDrinkbutton"> Search for drink</button>
+                </form>
+            </div>
+            <div class="drink-form-img">
+                <p></p>
+                <button class="search-food-btn">
+                    need food
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
     <%- include('./layout/footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+    <script src="https://cdn.rawgit.com/download/jQuery-Touch-Events/0.9.0/src/jquery.mobile-events.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/v1.1.2/dist/jquery.flip.min.js"></script>
+
     <script src="./js/app.js"></script>
+    <script src="./js/mhmd.js"></script>
+
 </body>
 
 </html>
