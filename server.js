@@ -11,7 +11,7 @@ const methodOverride = require('method-override');
 //app setup:
 const PORT = process.env.PORT || 3000;
 const app = express();
-const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URLL);
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
