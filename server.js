@@ -3,7 +3,7 @@
 // app dependencies 
 const express = require('express');
 require('dotenv').config();
-const pg = require('pg').Pool;
+const pg = require('pg');
 const superagent = require('superagent');
 const methodOverride = require('method-override');
 
@@ -11,12 +11,7 @@ const methodOverride = require('method-override');
 //app setup:
 const PORT = process.env.PORT || 3000;
 const app = express();
-const client = new pg({
-    connectionString: process.env.DATABASE_URLL,
-    ssl: {
-        rejectUnauthorized: false,
-      },
-});
+const client = new pg.Client(process.env.DATABASE_URL,{ssl: true});
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
@@ -68,7 +63,7 @@ function registerHandler (req,res){
     res.render('register',{isLoggedIn:true,isRegistered:true,id:''})
 }
 
-function favPageHandler (req,res){
+function favPageHandler(req,res){
     let id = req.query.id;
     let SQL = 'SELECT  a.*, b.* FROM foods AS a JOIN fav_foods AS b ON a.id = b.food_id WHERE b.user_id =$1;';
     let values=[id];
@@ -402,12 +397,11 @@ function getDrinkIngredients(drinkObject) {
 
 
 // all routes & error 
-// app.use(errorHandler);
+app.use(errorHandler);
 app.get('*', anyRouteHandler)
 
 // connection 
-// client.connect().then(() => {
+client.connect().then(() => {
     app.listen(PORT, () => { console.log(`Listening on ${PORT}`) })
 
-// }).catch(e=>{errorHandler('error with connecting the database = = ='+e,req,res)})
-
+}).catch((e,req,res)=>{errorHandler('error with connecting the database = = ='+e,req,res)})
