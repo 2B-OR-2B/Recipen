@@ -196,8 +196,8 @@ function saveDrinkHandler(req, res) {
 }
 
 
-function errorHandler(req, res,error) {
-    res.status(500).json(error)
+function errorHandler(req, res) {
+    res.status(500).json({"error":error})
 }
 
 function anyRouteHandler(req, res) {
