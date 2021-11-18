@@ -54,7 +54,7 @@ function deleteFavHandler (req,res){
     client.query(SQL,values).then(()=>{
         res.redirect(`/fav?id=${user_id}`)
     })
-    .catch(e=>{errorHandler('error within deleting from favorites = = ='+e,req,res)})
+    .catch(e=>{errorHandler('error within deleting from favorites = = ='+e)})
 
 
 }
@@ -72,8 +72,8 @@ function favPageHandler(req,res){
         let values=[id];
         client.query(SQL,values).then(response2=>{
             res.render('fav',{foods: response1.rows,drinks:response2.rows,id:id});
-        }).catch(e=>{errorHandler('error within joining the tables fav_drink and drinks = = ='+e,req,res)})
-    }).catch(e=>{errorHandler('error within joining the tables fav_food and foods = = ='+e,req,res)})
+        }).catch(e=>{errorHandler('error within joining the tables fav_drink and drinks = = ='+e)})
+    }).catch(e=>{errorHandler('error within joining the tables fav_food and foods = = ='+e)})
 
 }
 
@@ -100,7 +100,7 @@ function signInHandler(req, res) {
         }
         // front end check the type of response.. ( string (error) OR object )
 
-    }).catch(e=>{errorHandler('error while checking the email and password = = ='+e,req,res)})
+    }).catch(e=>{errorHandler('error while checking the email and password = = ='+e)})
 
 }
 
@@ -143,10 +143,10 @@ function homePageHandler(req, res) {
             superagent.get(cocktailUrl).then(cocktailResult => {
                 superagent.get(dessertUrl).then(dessertResult => {
                     res.render('index', { cocktail: cocktailResult.body, food: foodResult.body, dessert: dessertResult.body, user:data.rows[0]})
-                }).catch(e=>{errorHandler('error within getting data using dessertURL from the API = = ='+e,req,res)})
-            }).catch(e=>{errorHandler('error within getting data using cocktailURL from the API = = ='+e,req,res)})
-        }).catch(e=>{errorHandler('error within getting data using urlFood from the API = = ='+e,req,res)})
-    }).catch(e=>{errorHandler('error within getting user data  = = ='+e,req,res)})
+                }).catch(e=>{errorHandler('error within getting data using dessertURL from the API = = ='+e)})
+            }).catch(e=>{errorHandler('error within getting data using cocktailURL from the API = = ='+e)})
+        }).catch(e=>{errorHandler('error within getting data using urlFood from the API = = ='+e)})
+    }).catch(e=>{errorHandler('error within getting user data  = = ='+e)})
 
 }
 
@@ -166,7 +166,7 @@ function saveFoodHandler(req, res) {
         }
         ).catch(error=>{res.status(600).json(" ------ Already exists in your favorites")})
         
-    }).catch(e=>{errorHandler('error within insert food to foods table  = = ='+e,req,res)})
+    }).catch(e=>{errorHandler('error within insert food to foods table  = = ='+e)})
    
 }
 function saveDrinkHandler(req, res) {
@@ -190,13 +190,13 @@ function saveDrinkHandler(req, res) {
         }
         ).catch(error=>{res.status(600).json(" ------ Already exists in your favorites")})
         
-    }).catch(e=>{errorHandler('error within insert drink to drinks table  = = ='+e,req,res)})
+    }).catch(e=>{errorHandler('error within insert drink to drinks table  = = ='+eval)})
    
 
 }
 
 
-function errorHandler(error, req, res) {
+function errorHandler(req, res,error) {
     res.status(500).json(error)
 }
 
@@ -281,7 +281,7 @@ function searchFoodHandler(req, res) {
                             suggestionsArray=suggestionsArray.length? suggestionsArray : '';
                             res.render('result',{data:dataArray,suggestions:suggestionsArray,id:id});
                         }
-                    }).catch(e=>{errorHandler('error within getting data from API SEARCHFOODHANDLER inside map  = = ='+e,req,res)})
+                    }).catch(e=>{errorHandler('error within getting data from API SEARCHFOODHANDLER inside map  = = ='+e)})
             })
 
 
@@ -343,7 +343,7 @@ function searchDrinkHandler(req, res) {
                             res.render('result',{data:dataArray,suggestions:suggestionsArray,id:id});
                                 
                         }
-                    }).catch(e=>{errorHandler('error within getting data from API SEARCHDRINKHANDLER inside the map  = = ='+e,req,res)})
+                    }).catch(e=>{errorHandler('error within getting data from API SEARCHDRINKHANDLER inside the map  = = ='+e)})
             })
 
 
@@ -404,4 +404,4 @@ app.get('*', anyRouteHandler)
 client.connect().then(() => {
     app.listen(PORT, () => { console.log(`Listening on ${PORT}`) })
 
-}).catch((e,req,res)=>{errorHandler('error with connecting the database = = ='+e,req,res)})
+}).catch((e)=>{errorHandler('error with connecting the database = = ='+e)})

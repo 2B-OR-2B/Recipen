@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev":"nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -20,12 +21,11 @@
   "homepage": "https://github.com/2B-OR-2B/Recipen#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "ejs": "^3.1.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "method-override": "^3.0.0",
-    "pg": "^8.5.1",
+    "pg": "^8.7.1",
     "superagent": "^6.1.0"
-  },
-  "devDependencies": {}
+  }
 }
